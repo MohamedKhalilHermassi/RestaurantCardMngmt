@@ -23,7 +23,6 @@
     <ProjectReference Include="..\RM.CarteResto.Service\RM.CarteResto.Service.csproj" />
     <ProjectReference Include="..\RM.DemandeCarteResto.Business\RM.DemandeCarteResto.Business.csproj" />
     <ProjectReference Include="..\RM.DemandeCarteResto.Data\RM.DemandeCarteResto.Data.csproj" />
-    <ProjectReference Include="..\RM.EmailService\RM.EmailService.csproj" />
     <ProjectReference Include="..\RM.Notif.Abstraction\RM.Notif.Abstraction.csproj" />
     <ProjectReference Include="..\RM.Notif.Business\RM.Notif.Business.csproj" />
     <ProjectReference Include="..\RM.Notif.Data\RM.Notif.Data.csproj" />
