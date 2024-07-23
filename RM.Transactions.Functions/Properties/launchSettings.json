@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "RM.Transactions.Functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7100",
+      "launchBrowser": false
+    }
+  }
+}

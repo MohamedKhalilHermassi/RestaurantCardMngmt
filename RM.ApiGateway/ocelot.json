@@ -1,0 +1,85 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7207
+        }
+      ],
+      "UpstreamPathTemplate": "/user/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      /*  "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }*/
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7279
+        }
+      ],
+      "UpstreamPathTemplate": "/notif/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7063
+        }
+      ],
+      "UpstreamPathTemplate": "/transactions/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      /*  "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }*/
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7028
+        }
+      ],
+      "UpstreamPathTemplate": "/card/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7078
+        }
+      ],
+      "UpstreamPathTemplate": "/demandeTransaction/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      },
+      "enableLiveMetricsFilters": true
+    }
+  },
+  "CosmosDb": {
+    "AccountEndpoint": "https://khalilhermassi.documents.azure.com:443/",
+    "AccountKey": "2QcU5EE3ihmJPyWE2JAGdY49HXozhn7Ou3JORTjGQ6QzDcorzPmVtCxJxXw2UkDgSzXZzQBDsHARACDbZChnog==",
+    "DatabaseName": "RestaurantCardDb"
+  }
+}

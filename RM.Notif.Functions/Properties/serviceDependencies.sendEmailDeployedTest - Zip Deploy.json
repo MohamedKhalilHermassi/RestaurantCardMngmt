@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "appInsights1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/RMManagaerTrigger",
+      "type": "appInsights.azure",
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+      "dynamicId": null
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/sendEmailDeployedTest/providers/Microsoft.ServiceLinker/linkers/AzureWebJobsStorage_AF8FA462BF, /subscriptions/5fc4e582-6425-46c5-b9c8-9e3e6ae4fca2/resourceGroups/AzureFunctionsDeploy/providers/Microsoft.Web/sites/sendEmailDeployedTest/providers/Microsoft.ServiceLinker/linkers/AzureWebJobsStorage_5FA75BE25E",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/azurefunctionsdeplo9a66",
+      "type": "storage.azure",
+      "connectionId": "AzureWebJobsStorage",
+      "dynamicId": null
+    }
+  }
+}

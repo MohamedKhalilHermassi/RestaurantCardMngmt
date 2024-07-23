@@ -1,0 +1,6 @@
+@RM.ApiGateway_HostAddress = http://localhost:5011
+
+GET {{RM.ApiGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

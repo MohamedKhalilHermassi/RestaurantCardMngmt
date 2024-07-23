@@ -1,0 +1,23 @@
+﻿    <Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.27.2" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.63.0" />
+    <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RM.Transaction.Business\RM.Transaction.Business.csproj" />
+    <ProjectReference Include="..\RM.Transaction.Data\RM.Transaction.Data.csproj" />
+    <ProjectReference Include="..\RM.Transaction.Model\RM.Transaction.Model.csproj" />
+    <ProjectReference Include="..\RM.Transaction.Remote\RM.Transaction.Remote.csproj" />
+  </ItemGroup>
+
+</Project>
