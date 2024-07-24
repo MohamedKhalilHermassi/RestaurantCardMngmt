@@ -4,10 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RM.Transaction.Abstraction.Repositories;
-using RM.Transaction.Business.Commands;
-using RM.Transaction.Business.Queries;
-using RM.Transaction.Business;
 using RM.Transaction.Data.Data;
 using RM.CarteResto.Data.Data;
 using RM.CarteResto.Abstraction.Repositories;
@@ -18,7 +14,7 @@ using RM.CarteResto.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
@@ -49,9 +45,9 @@ builder.Services.AddControllers().AddJsonOptions(opt =>
     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
-builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
-builder.Services.AddScoped<TransactionQuery>();
-builder.Services.AddScoped<TransactionCommand>();
+builder.Services.AddTransactionServices();
+
+
 
 builder.Services.AddDbContext<CarteRestoContext>(options =>
 {

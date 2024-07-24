@@ -5,7 +5,6 @@ using RM.CarteResto.Remote.Contracts;
 using RM.DemandeCarteResto.Business.Commands;
 using RM.DemandeCarteResto.Business.Queries;
 using RM.DemandeCarteResto.Model.Entity;
-using RM.Notif.Abstraction.Commands;
 using RM.Notif.Business.Commands;
 using RM.Notif.Business.Queries;
 using RM.Notif.Model.Entities;

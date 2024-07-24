@@ -15,17 +15,17 @@ namespace RM.CarteResto.Business.Queries
 
         public async Task<IEnumerable<CarteRestaurant>> getAllCards()
         {
-        return await _carteRepo.getAllCards();
+        return await _carteRepo.GetAllCards();
         }
 
         public async Task<CarteRestaurant> getCardById(string partitionkey)
         {
-        return await _carteRepo.getCardById(partitionkey);
+        return await _carteRepo.GetCard(partitionkey);
         }
 
         public async Task<CarteRestaurant> getCardByUserId(string UserId)
         {
-            return await _carteRepo.getCardByUserId(UserId);
+            return await _carteRepo.GetCardByUserId(UserId);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace RM.CarteResto.Business.Commands
         public async Task<CarteRestaurant> addCard(CarteRestaurant carteResto)
         {
 
-          return  await _carteRepo.addCard(carteResto);
+          return  await _carteRepo.AddCard(carteResto);
         }
 
         public async Task ChargeCard(string partitionkey, float montant, string IdTransaction)
@@ -32,12 +32,12 @@ namespace RM.CarteResto.Business.Commands
 
         public async Task removeCard(string partitionkey)
         {
-           await _carteRepo.removeCard(partitionkey);
+           await _carteRepo.RemoveCard(partitionkey);
         }
 
         public async Task updateCard(string partitionkey, CarteRestaurant card)
         {
-            await _carteRepo.updateCard(partitionkey, card);
+            await _carteRepo.UpdateCard(partitionkey, card);
         }
     }
 }

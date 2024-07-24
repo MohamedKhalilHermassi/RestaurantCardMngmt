@@ -9,9 +9,9 @@ namespace RM.Notif.Abstraction.Repository
 {
     public interface INotificationRepository
     {
-        Task<IEnumerable<Notification>> getAllNotificationByReceiverId(string ReceiverId);
-        Task<Notification> addNotification(Notification notification);
-        Task readNotification(string PartitionKey);
+        Task<IEnumerable<Notification>> GetAllNotificationByReceiverId(string ReceiverId);
+        Task<Notification> AddNotification(Notification notification);
+        Task ReadNotification(string PartitionKey);
 
 
     }

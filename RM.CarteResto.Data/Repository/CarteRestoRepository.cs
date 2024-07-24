@@ -13,7 +13,7 @@ namespace RM.CarteResto.Data.Repository
         {
             _context = context;
         }
-        public async Task<CarteRestaurant> addCard(CarteRestaurant carteResto)
+        public async Task<CarteRestaurant> AddCard(CarteRestaurant carteResto)
         {
             var result = await _context.CartesRestaurant.AddAsync(carteResto);
             await _context.SaveChangesAsync();
@@ -43,10 +43,10 @@ namespace RM.CarteResto.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task decrementCardSolde(string partitionkey, float montant)
+        public async Task DecrementCardSolde(string partitionkey, float montant)
 
         {
-            var card = await getCardById(partitionkey);
+            var card = await GetCard(partitionkey);
             card.Solde -= montant;
             await _context.SaveChangesAsync();
         
@@ -76,16 +76,16 @@ namespace RM.CarteResto.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<CarteRestaurant>> getAllCards()
+        public async Task<IEnumerable<CarteRestaurant>> GetAllCards()
         {
             return _context.CartesRestaurant.AsEnumerable();
 
         }
-        public async Task<CarteRestaurant> getCardById(string partitionkey)
+        public async Task<CarteRestaurant> GetCard(string partitionKey)
         {
-            return await _context.CartesRestaurant.FindAsync(partitionkey);
+            return await _context.CartesRestaurant.WithPartitionKey(partitionKey).FirstAsync();
         }
-        public async Task<CarteRestaurant> getCardByUserId(string UserId)
+        public async Task<CarteRestaurant> GetCardByUserId(string UserId)
         {
             if (string.IsNullOrEmpty(UserId))
             {
@@ -103,7 +103,7 @@ namespace RM.CarteResto.Data.Repository
             return card;
         }
 
-        public async Task removeCard(string partitionkey)
+        public async Task RemoveCard(string partitionkey)
         {
             var card = await _context.CartesRestaurant.FindAsync(partitionkey);
             if (card == null)
@@ -115,7 +115,7 @@ namespace RM.CarteResto.Data.Repository
 
         }
 
-        public async Task updateCard(string partitionkey, CarteRestaurant card)
+        public async Task UpdateCard(string partitionkey, CarteRestaurant card)
         {
             if (partitionkey != card.PartitionKey)
             {
