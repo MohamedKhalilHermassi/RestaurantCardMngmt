@@ -14,17 +14,8 @@ namespace RM.DemandeCarteResto.Data.Repository
         {
             _context = context;
         }
-        public async Task acceptDemandeCard(string partitionkey)
-        {
-            var demand = await _context.DemandesCarteRestaurant.FindAsync(partitionkey);
-            if (demand == null)
-            {
-                throw new KeyNotFoundException($"DemandeCard with ID {partitionkey} not found");
-            }
-            demand.Status = true;
-            await _context.SaveChangesAsync();
-        }
-        public async Task<DemandeCarteRestaurant> addDemandeCarte(DemandeCarteRestaurant demandeCarteResto)
+  
+        public async Task<DemandeCarteRestaurant> AddDemandeCarte(DemandeCarteRestaurant demandeCarteResto)
         {
             if (demandeCarteResto == null)
             {
@@ -46,39 +37,28 @@ namespace RM.DemandeCarteResto.Data.Repository
 
             return null;
         }
-        public async Task<IEnumerable<DemandeCarteRestaurant>> getAllDemandes()
+        public async Task<IEnumerable<DemandeCarteRestaurant>> GetAllDemandes()
         {
             return _context.DemandesCarteRestaurant.AsEnumerable();
         }
 
-        public async Task<IEnumerable<DemandeCarteRestaurant>> getAllPendigDemandes()
+        public async Task<IEnumerable<DemandeCarteRestaurant>> GetAllPendigDemandes()
         {
             return await _context.DemandesCarteRestaurant.Where(d => d.Status== null).ToListAsync();
         }
-        public async Task<DemandeCarteRestaurant> getDemandeCardById(string partitionkey)
+        public async Task<DemandeCarteRestaurant> GetDemandeCardById(string partitionkey)
         {
-            
-                return await _context.DemandesCarteRestaurant.FindAsync(partitionkey);
-          
+
+            return await _context.DemandesCarteRestaurant.WithPartitionKey(partitionkey).FirstAsync();          
         }
-        public async  Task<IEnumerable<DemandeCarteRestaurant>> getDemandeCardByUserId(string UserId)
+        public async  Task<IEnumerable<DemandeCarteRestaurant>> GetDemandeCardByUserId(string UserId)
         {
             return await _context.DemandesCarteRestaurant.Where(d => d.UserId == UserId).ToListAsync();
         }
 
-        public async Task rejectDemandeCard(string partitionkey)
-        {
-            var card = await _context.DemandesCarteRestaurant.FindAsync(partitionkey);
-            if (card == null)
-            {
-                throw new KeyNotFoundException($"DemandeCard with ID {partitionkey} not found");
-            }
-            card.Status = false;
-          
-            await _context.SaveChangesAsync();
-        }
+      
 
-        public async Task removeDemandeCard(string partitionkey)
+        public async Task RemoveDemandeCard(string partitionkey)
         {
             var card = await _context.DemandesCarteRestaurant.FindAsync(partitionkey);
             if (card == null)
@@ -90,7 +70,7 @@ namespace RM.DemandeCarteResto.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task updateDemandeCard(string partitionkey, DemandeCarteRestaurant DemandeCarteRestaurant)
+        public async Task UpdateDemandeCard(string partitionkey, DemandeCarteRestaurant DemandeCarteRestaurant)
         {
             if (partitionkey != DemandeCarteRestaurant.PartitionKey)
             {

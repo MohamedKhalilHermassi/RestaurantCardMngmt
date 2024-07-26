@@ -10,15 +10,10 @@ namespace RM.NotificationsServer.Controllers
     [ApiController]
     public class NotificationController : ControllerBase
     {
-        private readonly NotificationQueries _notificationQueries;
-        private readonly NotificationCommands _notificationCommands;
-
-
-        public NotificationController(NotificationQueries notificationQueries, NotificationCommands notificationCommands)
-        {
-            _notificationQueries = notificationQueries;
-            _notificationCommands = notificationCommands;
-        }
+        ReadNotificationCommand _readNotificationCommand;
+        GetAllNotificationsByReceiverIdQuery _getAllNotificationByReceiverId;
+            
+       
 
         [HttpGet("{admin}")]
         [Authorize(Roles ="Admin")]

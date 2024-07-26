@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using RM.Transaction.Abstraction.Repositories;
 using RM.Transaction.Data.Data;
 using RM.Transaction.Model.Entity;
 using System.Collections.Concurrent;
+using System.Runtime.InteropServices.Marshalling;
 
 namespace RM.Transaction.Business
 {
@@ -15,7 +17,7 @@ namespace RM.Transaction.Business
            _context = context;
         }
 
-        public async Task<Transactions> addTransaction(Transactions transaction)
+        public async Task<Transactions> AddTransaction(Transactions transaction)
         {
             var result =   await _context.Transactions.AddAsync(transaction);
             
@@ -24,23 +26,22 @@ namespace RM.Transaction.Business
                 
         }
 
-        public async Task<IEnumerable<Transactions>> getAllTransactions()
+        public async Task<IEnumerable<Transactions>> GetAllTransactions()
         {
-            return  _context.Transactions.AsEnumerable();
+            return _context.Transactions.AsEnumerable();
         }
 
-        public async Task<Transactions> getTransactionById(string PartitionId)
+        public async Task<Transactions> GetTransaction(string partitionKey)
         {
-            
-            return await _context.Transactions.FindAsync(PartitionId);
+            return await _context.Transactions.WithPartitionKey(partitionKey).FirstAsync();
         }
 
-        public async Task<IEnumerable<Transactions>> getTransactionsByCardRestoId(string cardRestoId)
+        public async Task<IEnumerable<Transactions>> GetTransactionsByCardRestoId(string cardRestoId)
         {
             return await _context.Transactions.Where(t => t.CarteRestoId == cardRestoId).ToListAsync();
         }
 
-        public async Task removeTransaction(string partitionkey)
+        public async Task RemoveTransaction(string partitionkey)
         {
             var transaction = await _context.Transactions.FindAsync(partitionkey);
             if (transaction == null)
@@ -53,7 +54,7 @@ namespace RM.Transaction.Business
 
         }
 
-        public async Task  updateTransaction(string partitionkey, Transactions transaction)
+        public async Task  UpdateTransaction(string partitionkey, Transactions transaction)
         {
             if (partitionkey != transaction.PartitionKey)
             {

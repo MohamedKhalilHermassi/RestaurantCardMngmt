@@ -2,6 +2,7 @@
 using Grpc.Core;
 using ProtoBuf.Grpc;
 using RM.CarteResto.Abstraction.Repositories;
+using RM.CarteResto.Business.Commands;
 using RM.CarteResto.Model.Entitiy;
 using RM.CarteResto.Remote.Contracts;
 
@@ -10,10 +11,11 @@ namespace RM.CarteResto.Service.Services
     public class CarteRestoServiceGRPC : ICarteRestoService
     {
         private readonly ICarteRestoRepository _carteRepo;
-
-        public CarteRestoServiceGRPC(ICarteRestoRepository carteRepo)
+        private readonly DecrementBalanceCommand _decrementBalanceCommand;
+        public CarteRestoServiceGRPC(ICarteRestoRepository carteRepo, DecrementBalanceCommand decrementBalanceCommand)
         {
             _carteRepo = carteRepo;
+            _decrementBalanceCommand = decrementBalanceCommand;
         }
 
         public async Task<CarteRestoByIdReply> addCarteResto(CarteRestoByIdReply carteResto)
@@ -28,7 +30,7 @@ namespace RM.CarteResto.Service.Services
                 UserId = carteResto.UserId,
                 UserEmail = carteResto.UserEmail,
             };
-            var addedCard = await _carteRepo.addCard(card);
+            var addedCard = await _carteRepo.AddCard(card);
             var reply = new CarteRestoByIdReply
             {
                 Id = Guid.NewGuid(),
@@ -43,7 +45,7 @@ namespace RM.CarteResto.Service.Services
         }
         public async Task<AllCartesRestoReply> GetAllCarteResto(Empty request, CallContext context = default)
         {
-            var cards = await _carteRepo.getAllCards();
+            var cards = await _carteRepo.GetAllCards();
 
             var response = new AllCartesRestoReply
             {
@@ -60,7 +62,7 @@ namespace RM.CarteResto.Service.Services
 
         public async Task<CarteRestoByIdReply> getCarteRestoById(CarteRestoByIdRequest request, CallContext context = default)
         {
-            var card = await _carteRepo.getCardById(request.PartitionKey);
+            var card = await _carteRepo.GetCard(request.PartitionKey);
 
             if (card == null)
             {
@@ -81,13 +83,13 @@ namespace RM.CarteResto.Service.Services
 
         public async Task<Empty> removeCarteResto(CarteRestoByIdRequest request, CallContext context = default)
         {
-            var card = await _carteRepo.getCardById(request.PartitionKey);
+            var card = await _carteRepo.GetCard(request.PartitionKey);
             if (card == null)
             {
                 throw new RpcException(new Status(StatusCode.NotFound, $"Card with ID {request.PartitionKey} not found."));
             }
 
-            await _carteRepo.removeCard(request.PartitionKey);
+            await _carteRepo.RemoveCard(request.PartitionKey);
             return new Empty();
         }
 
@@ -103,7 +105,7 @@ namespace RM.CarteResto.Service.Services
                 return false;
             }
         
-            await _carteRepo.decrementCardSolde(id, montant);
+            await _decrementBalanceCommand.ExecuteAsync(id, montant);
             return true;
         }
     }

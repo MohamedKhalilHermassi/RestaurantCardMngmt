@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using RM.Notif.Abstraction.Commands;
-using RM.Notif.Abstraction.Queries;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 

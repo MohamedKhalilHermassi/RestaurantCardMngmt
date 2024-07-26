@@ -4,14 +4,12 @@ namespace RM.DemandeCarteResto.Abstraction.Repositories
 { 
     public interface IDemandeCarteRestoRepository
     {
-        Task<DemandeCarteRestaurant> addDemandeCarte(DemandeCarteRestaurant DemandeCarteResto);
-        Task<DemandeCarteRestaurant> getDemandeCardById(string partitionkey);
-        Task<IEnumerable<DemandeCarteRestaurant>> getDemandeCardByUserId(string UserId);
-        Task<IEnumerable<DemandeCarteRestaurant>> getAllDemandes();
-        Task<IEnumerable<DemandeCarteRestaurant>> getAllPendigDemandes();
-        Task acceptDemandeCard(string partitionkey);
-        Task removeDemandeCard(string partitionkey);
-        Task rejectDemandeCard(string partitionkey);
-        Task updateDemandeCard(string partitionkey, DemandeCarteRestaurant DemandeCarteRestaurant);
+        Task<DemandeCarteRestaurant> AddDemandeCarte(DemandeCarteRestaurant DemandeCarteResto);
+        Task<DemandeCarteRestaurant> GetDemandeCardById(string partitionkey);
+        Task<IEnumerable<DemandeCarteRestaurant>> GetDemandeCardByUserId(string UserId);
+        Task<IEnumerable<DemandeCarteRestaurant>> GetAllDemandes();
+        Task<IEnumerable<DemandeCarteRestaurant>> GetAllPendigDemandes();
+        Task RemoveDemandeCard(string partitionkey);
+        Task UpdateDemandeCard(string partitionkey, DemandeCarteRestaurant DemandeCarteRestaurant);
     }
 }

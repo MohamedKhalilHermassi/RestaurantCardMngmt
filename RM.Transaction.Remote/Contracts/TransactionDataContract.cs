@@ -33,6 +33,8 @@ namespace RM.Transaction.Remote.Contracts
 
     }
 
+
+    
     [DataContract]
     public class AllTransactionsReply
     {

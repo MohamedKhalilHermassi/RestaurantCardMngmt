@@ -5,15 +5,12 @@ namespace RM.CarteResto.Abstraction.Repositories
 {
     public interface ICarteRestoRepository
     {
-        Task<CarteRestaurant> addCard(CarteRestaurant carteResto);
-        Task<CarteRestaurant> getCardByUserId(string UserId);
-        Task<CarteRestaurant> getCardById(string partitionkey);
-        Task<IEnumerable<CarteRestaurant>> getAllCards();
-        Task removeCard(string partitionkey);
-        Task ChargeCard(string partitionkey, float montant, string IdTransaction);
-        Task DischargeCard(string partitionkey, float montant, string IdTransaction);
+        Task<CarteRestaurant> AddCard(CarteRestaurant carteResto);
+        Task<CarteRestaurant> GetCardByUserId(string UserId);
+        Task<CarteRestaurant> GetCard(string partitionKey);
+        Task<IEnumerable<CarteRestaurant>> GetAllCards();
+        Task RemoveCard(string partitionkey);
 
-        Task updateCard(string partitionkey, CarteRestaurant card);
-        Task decrementCardSolde(string partitionkey, float montant);
+        Task UpdateCard(string partitionkey, CarteRestaurant card);
     }
 }

@@ -15,21 +15,20 @@ namespace RM.Notif.Data.Repository
             _context = context;
         }
 
-        public async Task<Notification> addNotification(Notification notification)
+        public async Task<Notification> AddNotification(Notification notification)
         {
             var result = await _context.Notifications.AddAsync(notification);
             await _context.SaveChangesAsync();
             return result.Entity;
         }
 
-        public async Task<IEnumerable<Notification>> getAllNotificationByReceiverId(string ReceiverId)
+        public async Task<IEnumerable<Notification>> GetAllNotificationByReceiverId(string ReceiverId)
         {
             return await _context.Notifications.Where(n => n.ReceiverId == ReceiverId).ToListAsync();
         }
-        public async Task readNotification(string partitionKey)
+        public async Task ReadNotification(string partitionKey)
         {
             var notification = await _context.Notifications.FirstOrDefaultAsync(n => n.PartitionKey == partitionKey);
-            Console.WriteLine(notification);
             if (notification != null)
             {
                 notification.Read = true;

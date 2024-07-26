@@ -13,79 +13,23 @@ namespace RM.CarteResto.Data.Repository
         {
             _context = context;
         }
-        public async Task<CarteRestaurant> addCard(CarteRestaurant carteResto)
+        public async Task<CarteRestaurant> AddCard(CarteRestaurant carteResto)
         {
             var result = await _context.CartesRestaurant.AddAsync(carteResto);
             await _context.SaveChangesAsync();
             return result.Entity;
         }
-        public async Task ChargeCard(string partitionkey, float montant, string IdTransaction)
+
+        public async Task<IEnumerable<CarteRestaurant>> GetAllCards()
         {
-            var card = await _context.CartesRestaurant.FindAsync(partitionkey);
-            if (card == null)
-            {
-                throw new InvalidOperationException($"No card found for ID {partitionkey}");
-            }
-
-            var newTransactionIds = new string[card.TransactionIds.Length + 1];
-
-            for (int i = 0; i < card.TransactionIds.Length; i++)
-            {
-                newTransactionIds[i] = card.TransactionIds[i];
-            }
-
-            newTransactionIds[card.TransactionIds.Length] = IdTransaction;
-
-            card.TransactionIds = newTransactionIds;
-
-            card.Solde += montant;
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task decrementCardSolde(string partitionkey, float montant)
-
-        {
-            var card = await getCardById(partitionkey);
-            card.Solde -= montant;
-            await _context.SaveChangesAsync();
-        
-        }
-
-        public async Task DischargeCard(string partitionkey, float montant, string IdTransaction)
-        {
-            var card = await _context.CartesRestaurant.FindAsync(partitionkey);
-            if (card == null)
-            {
-                throw new InvalidOperationException($"No card found for ID {partitionkey}");
-            }
-
-            var newTransactionIds = new string[card.TransactionIds.Length + 1];
-
-            for (int i = 0; i < card.TransactionIds.Length; i++)
-            {
-                newTransactionIds[i] = card.TransactionIds[i];
-            }
-
-            newTransactionIds[card.TransactionIds.Length] = IdTransaction;
-
-            card.TransactionIds = newTransactionIds;
-
-            card.Solde -= montant;
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<CarteRestaurant>> getAllCards()
-        {
-            return _context.CartesRestaurant.AsEnumerable();
+            return  _context.CartesRestaurant.AsEnumerable();
 
         }
-        public async Task<CarteRestaurant> getCardById(string partitionkey)
+        public async Task<CarteRestaurant> GetCard(string partitionKey)
         {
-            return await _context.CartesRestaurant.FindAsync(partitionkey);
+            return await _context.CartesRestaurant.WithPartitionKey(partitionKey).FirstAsync();
         }
-        public async Task<CarteRestaurant> getCardByUserId(string UserId)
+        public async Task<CarteRestaurant> GetCardByUserId(string UserId)
         {
             if (string.IsNullOrEmpty(UserId))
             {
@@ -103,7 +47,7 @@ namespace RM.CarteResto.Data.Repository
             return card;
         }
 
-        public async Task removeCard(string partitionkey)
+        public async Task RemoveCard(string partitionkey)
         {
             var card = await _context.CartesRestaurant.FindAsync(partitionkey);
             if (card == null)
@@ -115,7 +59,7 @@ namespace RM.CarteResto.Data.Repository
 
         }
 
-        public async Task updateCard(string partitionkey, CarteRestaurant card)
+        public async Task UpdateCard(string partitionkey, CarteRestaurant card)
         {
             if (partitionkey != card.PartitionKey)
             {

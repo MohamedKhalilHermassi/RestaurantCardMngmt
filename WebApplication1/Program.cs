@@ -40,9 +40,7 @@ builder.Services.AddDbContext<NotificationContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
-builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
-builder.Services.AddScoped<NotificationCommands>();
-builder.Services.AddScoped<NotificationQueries>();
+builder.Services.AddNotificationsServices();
 
 var validIssuer = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidIssuer");
 var validAudience = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidAudience");

@@ -1,20 +1,16 @@
-using System.Text;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RM.CarteResto.Abstraction.Repositories;
-using RM.CarteResto.Business.Commands;
-using RM.CarteResto.Business.Queries;
 using RM.CarteResto.Data.Data;
-using RM.CarteResto.Data.Repository;
 using RM.Transaction.Abstraction.Repositories;
 using RM.Transaction.Business;
 using RM.Transaction.Data.Data;
 using RM.Transaction.Remote.Contracts;
 using RM.Transaction.Remote.Extension;
 using RM.Transaction.Service.Services;
+using System.Text;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,9 +42,7 @@ builder.Services.AddDbContext<CarteRestoContext>(options =>
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
 
-builder.Services.AddScoped<ICarteRestoRepository, CarteRestoRepository>();
-builder.Services.AddScoped<CarteRestoQuery>();
-builder.Services.AddScoped<CarteRestoCommands>();
+builder.Services.AddCarteRestoServices();
 
 builder.Services.AddDbContext<TransactionContext>(options =>
 {
@@ -57,9 +51,9 @@ builder.Services.AddDbContext<TransactionContext>(options =>
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 //Transaction GRPC 
-builder.Services.AddTransactionGrpcClient();
-builder.Services.AddScoped<ITransactionServiceContract, TransactionServiceGRPC>();
-
+//builder.Services.AddTransactionGrpcClient();
+//builder.Services.AddScoped<ITransactionServiceContract, TransactionServiceGRPC>();
+builder.Services.AddCarteRestoServices();
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());

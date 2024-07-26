@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.6.24327.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RM.Notif.Abstraction\RM.Notif.Abstraction.csproj" />
+    <ProjectReference Include="..\RM.Notif.Data\RM.Notif.Data.csproj" />
   </ItemGroup>
 
 </Project>

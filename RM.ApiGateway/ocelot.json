@@ -24,7 +24,7 @@
         {
           "Host": "localhost",
           "Port": 7279
-        }
+        }s
       ],
       "UpstreamPathTemplate": "/notif/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
