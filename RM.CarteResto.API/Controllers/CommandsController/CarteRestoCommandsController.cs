@@ -10,70 +10,68 @@ namespace RM.CarteResto.API.Controllers.CommandsController
     [ApiController]
     public class CarteRestoCommandsController : ControllerBase
     {
-        private readonly CarteRestoCommands _carteCommands;
+        private readonly AddCardCommand _addCardCommand;
+        private readonly ChargeCardCommand _chargeCardCommand;
+        private readonly DischargeCardCommand _dischargeCardCommand;
+        private readonly RemoveCardCommand _removeCardCommand;
+        private readonly UpdateCardCommand _updateCardCommand;
+
         private readonly ITransactionServiceContract _transactionService;
-        public CarteRestoCommandsController(CarteRestoCommands carteCommands, ITransactionServiceContract transactionService)
+
+        public CarteRestoCommandsController(
+            AddCardCommand addCardCommand,
+            ChargeCardCommand chargeCardCommand,
+            DischargeCardCommand dischargeCardCommand, 
+            RemoveCardCommand removeCardCommand, 
+            UpdateCardCommand updateCardCommand, 
+            ITransactionServiceContract transactionService)
         {
-            _carteCommands = carteCommands;
+            _addCardCommand = addCardCommand;
+            _chargeCardCommand = chargeCardCommand;
+            _dischargeCardCommand = dischargeCardCommand;
+            _removeCardCommand = removeCardCommand;
+            _updateCardCommand = updateCardCommand;
             _transactionService = transactionService;
         }
 
         [HttpPost]
         public async Task<ActionResult<CarteRestaurant>> addCard(CarteRestaurant card)
         {
-            await _carteCommands.addCard(card);
+            await _addCardCommand.ExecuteAsync(card);
             return CreatedAtAction(nameof(addCard), new { id = card.Id }, card);
         }
 
         [HttpDelete("{partitionkey}")]
         public async Task<IActionResult> deleteCard(string partitionkey)
         {
-            await _carteCommands.removeCard(partitionkey);
+            await _removeCardCommand.ExecuteAsync(partitionkey);
             return NoContent();
         }
 
         [HttpPut("{partitionkey}")]
         public async Task<IActionResult> updateCard(string partitionkey, CarteRestaurant card)
         {
-            await _carteCommands.updateCard(partitionkey, card);
+            await _updateCardCommand.ExecuteAsync(partitionkey, card);
             return NoContent();
         }
 
         [HttpPut("chargeCard/{partitionkey}/{montant}")]
-        [Authorize(Roles ="Admin")]
+    //    [Authorize(Roles ="Admin")]
         public async Task<IActionResult> chargeCard(string partitionkey, float montant)
         {
-            var trasnaction = new TransactionByIdReply
-            {
-                CarteRestoId = partitionkey,
-                Description = "Recharge de la carte restaurant ",
-                Montant = montant,
-                Type = true
-            };
-            await _transactionService.addTransaction(trasnaction);
-            Console.WriteLine("Hello World!");
-
-            Console.WriteLine(partitionkey);
-            var IdTran = await _transactionService.getTransactionByCardId(partitionkey);
-            await _carteCommands.ChargeCard(partitionkey, montant, IdTran.PartitionKey);
+            
+            await _chargeCardCommand.ExecuteAsync(partitionkey, montant);    
 
             return NoContent();
 
         }
+
         [HttpPut("dischargeCard/{partitionkey}/{montant}/{description}")]
        // [Authorize(Roles = "User")]
         public async Task<IActionResult> DischargeCard(string partitionkey, float montant,string description)
         {
-            var trasnaction = new TransactionByIdReply
-            {
-                CarteRestoId = partitionkey,
-                Description = description,
-                Montant = montant,
-                Type = false
-            };
-            await _transactionService.addTransaction(trasnaction);
-            var IdTran = await _transactionService.getTransactionByCardId(partitionkey);
-            await _carteCommands.DischargeCard(partitionkey, montant, IdTran.Id.ToString());
+          
+            await _dischargeCardCommand.ExecuteAsync(partitionkey,montant,description);
 
             return NoContent();
 

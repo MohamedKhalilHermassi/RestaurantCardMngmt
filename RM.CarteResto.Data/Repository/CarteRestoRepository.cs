@@ -19,66 +19,10 @@ namespace RM.CarteResto.Data.Repository
             await _context.SaveChangesAsync();
             return result.Entity;
         }
-        public async Task ChargeCard(string partitionkey, float montant, string IdTransaction)
-        {
-            var card = await _context.CartesRestaurant.FindAsync(partitionkey);
-            if (card == null)
-            {
-                throw new InvalidOperationException($"No card found for ID {partitionkey}");
-            }
-
-            var newTransactionIds = new string[card.TransactionIds.Length + 1];
-
-            for (int i = 0; i < card.TransactionIds.Length; i++)
-            {
-                newTransactionIds[i] = card.TransactionIds[i];
-            }
-
-            newTransactionIds[card.TransactionIds.Length] = IdTransaction;
-
-            card.TransactionIds = newTransactionIds;
-
-            card.Solde += montant;
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DecrementCardSolde(string partitionkey, float montant)
-
-        {
-            var card = await GetCard(partitionkey);
-            card.Solde -= montant;
-            await _context.SaveChangesAsync();
-        
-        }
-
-        public async Task DischargeCard(string partitionkey, float montant, string IdTransaction)
-        {
-            var card = await _context.CartesRestaurant.FindAsync(partitionkey);
-            if (card == null)
-            {
-                throw new InvalidOperationException($"No card found for ID {partitionkey}");
-            }
-
-            var newTransactionIds = new string[card.TransactionIds.Length + 1];
-
-            for (int i = 0; i < card.TransactionIds.Length; i++)
-            {
-                newTransactionIds[i] = card.TransactionIds[i];
-            }
-
-            newTransactionIds[card.TransactionIds.Length] = IdTransaction;
-
-            card.TransactionIds = newTransactionIds;
-
-            card.Solde -= montant;
-
-            await _context.SaveChangesAsync();
-        }
 
         public async Task<IEnumerable<CarteRestaurant>> GetAllCards()
         {
-            return _context.CartesRestaurant.AsEnumerable();
+            return  _context.CartesRestaurant.AsEnumerable();
 
         }
         public async Task<CarteRestaurant> GetCard(string partitionKey)

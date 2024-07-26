@@ -21,21 +21,20 @@ namespace RM.Transaction.Service.Services
         {
             var newTransaction = new Transactions
             {
-                Id = request.Id,
+                
                 Date = DateTime.Now,
                 Description = request.Description,
                 Montant = request.Montant,
                 Type = request.Type,
                 CarteRestoId = request.CarteRestoId
-                
+               
 
             };
 
-            var addedTransaction = await _transactionRepo.addTransaction(newTransaction);
+            var addedTransaction = await _transactionRepo.AddTransaction(newTransaction);
 
             var response = new TransactionByIdReply
             {
-                Id = addedTransaction.Id,
                 Date = DateTime.Now,
                 Description = addedTransaction.Description,
                 Montant = addedTransaction.Montant,
@@ -46,7 +45,7 @@ namespace RM.Transaction.Service.Services
 
         public async Task<AllTransactionsReply> GetAllTransactions(Empty request, CallContext context = default)
         {
-            var transactions = await _transactionRepo.getAllTransactions();
+            var transactions = await _transactionRepo.GetAllTransactions();
 
             var response = new AllTransactionsReply
             {
@@ -65,7 +64,7 @@ namespace RM.Transaction.Service.Services
 
         public async Task<TransactionByIdReply> getTransactionById(TransactionByIdRequest request, CallContext context = default)
         {
-            var transaction = await _transactionRepo.getTransactionById(request.partitionkey);
+            var transaction = await _transactionRepo.GetTransaction(request.partitionkey);
 
             if (transaction == null)
             {
@@ -86,7 +85,7 @@ namespace RM.Transaction.Service.Services
 
         public async Task<TransactionByIdReply> getTransactionByCardId(string id, CallContext context = default)
         {
-            var transactions = await _transactionRepo.getTransactionsByCardRestoId(id);
+            var transactions = await _transactionRepo.GetTransactionsByCardRestoId(id);
 
             if (transactions == null || !transactions.Any())
             {
@@ -115,13 +114,13 @@ namespace RM.Transaction.Service.Services
 
         public async Task<Empty> RemoveTransaction(TransactionByIdRequest request, CallContext context = default)
         {
-            var transaction = await _transactionRepo.getTransactionById(request.partitionkey);
+            var transaction = await _transactionRepo.GetTransaction(request.partitionkey);
             if (transaction == null)
             {
                 throw new RpcException(new Status(StatusCode.NotFound, $"Transaction with ID {request.partitionkey} not found."));
             }
 
-            await _transactionRepo.removeTransaction(request.partitionkey);
+            await _transactionRepo.RemoveTransaction(request.partitionkey);
             return new Empty();
         }
     }

@@ -9,9 +9,7 @@ namespace RM.DemandeCarteResto.Abstraction.Repositories
         Task<IEnumerable<DemandeCarteRestaurant>> GetDemandeCardByUserId(string UserId);
         Task<IEnumerable<DemandeCarteRestaurant>> GetAllDemandes();
         Task<IEnumerable<DemandeCarteRestaurant>> GetAllPendigDemandes();
-        Task AcceptDemandeCard(string partitionkey);
         Task RemoveDemandeCard(string partitionkey);
-        Task RejectDemandeCard(string partitionkey);
         Task UpdateDemandeCard(string partitionkey, DemandeCarteRestaurant DemandeCarteRestaurant);
     }
 }

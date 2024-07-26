@@ -8,26 +8,34 @@ namespace RM.DemandeCarteResto.API.Controllers.QueriesController
     [Route("api/[controller]")]
     [ApiController]
     public class DemandeCardQueriesController : ControllerBase
-    { 
-        private readonly DemandeCarteRestoQueries _demandeCarteQuery;
+    {
 
-        public DemandeCardQueriesController(DemandeCarteRestoQueries demandeCarteQuery)
+
+        GetAllDemandesCardsQuery _getAllDemandesCardsQuery;
+        GetAllPendingDemandsQuery _getAllPendingDemandsQuery;
+        GetDemandCardByIdQuery _getDemandCardByIdQuery;
+        GetDemandeCardByUserIdQuery _getDemandeCardByUserIdQuery;
+
+        public DemandeCardQueriesController(GetAllDemandesCardsQuery getAllDemandesCardsQuery, GetAllPendingDemandsQuery getAllPendingDemandsQuery, GetDemandCardByIdQuery getDemandCardByIdQuery, GetDemandeCardByUserIdQuery getDemandeCardByUserIdQuery)
         {
-            _demandeCarteQuery = demandeCarteQuery ?? throw new ArgumentNullException(nameof(_demandeCarteQuery));
+            _getAllDemandesCardsQuery = getAllDemandesCardsQuery;
+            _getAllPendingDemandsQuery = getAllPendingDemandsQuery;
+            _getDemandCardByIdQuery = getDemandCardByIdQuery;
+            _getDemandeCardByUserIdQuery = getDemandeCardByUserIdQuery;
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin")]
+       // [Authorize(Roles ="Admin")]
         public async Task<ActionResult<List<DemandeCarteRestaurant>>> GetAllDemandesCards()
         {
-            var demandesCards = await _demandeCarteQuery.getAllDemandesCards();
+            var demandesCards = await _getAllDemandesCardsQuery.ExecuteAsync();
             return Ok(demandesCards);
         }
         [HttpGet("pending")]
-        [Authorize(Roles ="Admin")]
+    //    [Authorize(Roles ="Admin")]
         public async Task<ActionResult<List<DemandeCarteRestaurant>>> GetAllPendingDemandesCards()
         {
-            var pendingDemandesCards = await _demandeCarteQuery.getAllPendigDemandes();
+            var pendingDemandesCards = await _getAllPendingDemandsQuery.ExecuteAsync();
             return Ok(pendingDemandesCards);
         }
         /* [HttpGet("GetTransactionsFromCardsService")]
@@ -46,7 +54,7 @@ namespace RM.DemandeCarteResto.API.Controllers.QueriesController
         [HttpGet("{partitionkey}")]
         public async Task<ActionResult<DemandeCarteRestaurant>> GetDemandeCardById(string partitionkey)
         {
-            var demandeCard = await _demandeCarteQuery.getDemandeCardById(partitionkey);
+            var demandeCard = await _getDemandCardByIdQuery.ExecuteAsync(partitionkey);
             if (demandeCard == null)
             {
                 return NotFound();
@@ -54,10 +62,10 @@ namespace RM.DemandeCarteResto.API.Controllers.QueriesController
             return Ok(demandeCard);
         }
         [HttpGet("getDemandeByUserId/{id}")]
-        [Authorize]
+      //  [Authorize]
         public async Task<ActionResult<DemandeCarteRestaurant>> GetDemandeByUserId(string id)
         {
-            var demandeCard = await _demandeCarteQuery.getDemandeCardByUserId(id);
+            var demandeCard = await _getDemandeCardByUserIdQuery.ExecuteAsync(id);
             if (demandeCard == null)
             {
                 return NotFound();

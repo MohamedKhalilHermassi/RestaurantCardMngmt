@@ -3,7 +3,7 @@ using RM.Notif.Model.Entities;
 
 namespace RM.DemandeCarteResto.Data.Data
 {
-    public class NotificationContext : DbContext
+    public class NotificationContext : DbContext    
     {
         public DbSet<Notification> Notifications { get; set; }
         public NotificationContext(DbContextOptions<NotificationContext> options) : base(options)
@@ -19,6 +19,7 @@ namespace RM.DemandeCarteResto.Data.Data
             modelBuilder.Entity<Notification>()
                .Property(c => c.NotificationId)
                .ValueGeneratedOnAdd();
+        
 
           
         }

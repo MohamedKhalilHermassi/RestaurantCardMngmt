@@ -2,6 +2,7 @@
 using Grpc.Core;
 using ProtoBuf.Grpc;
 using RM.CarteResto.Abstraction.Repositories;
+using RM.CarteResto.Business.Commands;
 using RM.CarteResto.Model.Entitiy;
 using RM.CarteResto.Remote.Contracts;
 
@@ -10,10 +11,11 @@ namespace RM.CarteResto.Service.Services
     public class CarteRestoServiceGRPC : ICarteRestoService
     {
         private readonly ICarteRestoRepository _carteRepo;
-
-        public CarteRestoServiceGRPC(ICarteRestoRepository carteRepo)
+        private readonly DecrementBalanceCommand _decrementBalanceCommand;
+        public CarteRestoServiceGRPC(ICarteRestoRepository carteRepo, DecrementBalanceCommand decrementBalanceCommand)
         {
             _carteRepo = carteRepo;
+            _decrementBalanceCommand = decrementBalanceCommand;
         }
 
         public async Task<CarteRestoByIdReply> addCarteResto(CarteRestoByIdReply carteResto)
@@ -103,7 +105,7 @@ namespace RM.CarteResto.Service.Services
                 return false;
             }
         
-            await _carteRepo.DecrementCardSolde(id, montant);
+            await _decrementBalanceCommand.ExecuteAsync(id, montant);
             return true;
         }
     }

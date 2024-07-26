@@ -10,36 +10,45 @@ namespace RM.CarteResto.API.Controllers.QueriesController
     [ApiController]
     public class CarteRestoQueriesController : ControllerBase
     {
-        private readonly CarteRestoQuery _carteQuery;
-        public CarteRestoQueriesController(CarteRestoQuery carteQuery)
+        GetAllCardsQuery _getAllCardsQuery;
+        GetCardByUserIdQuery _getCardByUserIdQuery;
+        GetCardQuery _getCardQuery;
+
+        public CarteRestoQueriesController(
+            GetAllCardsQuery getAllCardsQuery, 
+            GetCardByUserIdQuery getCardByUserIdQuery, 
+            GetCardQuery getCardQuery)
         {
-            _carteQuery = carteQuery ?? throw new ArgumentNullException(nameof(_carteQuery));
+            _getAllCardsQuery = getAllCardsQuery;
+            _getCardByUserIdQuery = getCardByUserIdQuery;
+            _getCardQuery = getCardQuery;
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+    //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<CarteRestaurant>>> GetAllCards()
         {
-            var cards = await _carteQuery.getAllCards();
+            var cards = await _getAllCardsQuery.ExecuteAsync();
             return Ok(cards);
         }
-        [HttpGet("GetTransactionsFromCardsService/{id}")]
-        /*  public async Task<ActionResult<TransactionByIdReply>> GetAllTransactionsInCardsService(string id)
-          {
-              var client = _grpcConfigTransaction.CreateGrpcClient<ITransactionServiceContract>();
+        /* 
+                [HttpGet("GetTransactionsFromCardsService/{id}")]
+                 public async Task<ActionResult<TransactionByIdReply>> GetAllTransactionsInCardsService(string id)
+                  {
+                      var client = _grpcConfigTransaction.CreateGrpcClient<ITransactionServiceContract>();
 
 
-              Guid myGuid = new Guid(id);
-              var reply = await client.getTransactionById(
-                  new TransactionByIdRequest { Id = myGuid });
-              return Ok(reply);
+                      Guid myGuid = new Guid(id);
+                      var reply = await client.getTransactionById(
+                          new TransactionByIdRequest { Id = myGuid });
+                      return Ok(reply);
 
-          }*/
+                  }*/
 
         [HttpGet("{partitionkey}")]
         public async Task<ActionResult<CarteRestaurant>> GetCardById(string partitionkey)
         {
-            var transaction = await _carteQuery.getCardById(partitionkey);
+            var transaction = await _getCardQuery.ExecuteAsync(partitionkey);
             if (transaction == null)
             {
                 return NotFound();
@@ -47,10 +56,10 @@ namespace RM.CarteResto.API.Controllers.QueriesController
             return Ok(transaction);
         }
         [HttpGet("getCardByUserId/{id}")]
-        [Authorize]
+     // [Authorize]
         public async Task<ActionResult<CarteRestaurant>> GetCardByUserId(string id)
         {
-            var card = await _carteQuery.getCardByUserId(id);
+            var card = await _getCardByUserIdQuery.ExecuteAsync(id);
             if (card == null)
             {
                 return NotFound();

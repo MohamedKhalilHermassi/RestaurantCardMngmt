@@ -1,7 +1,3 @@
-using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Text;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -12,16 +8,15 @@ using RM.CarteResto.Data.Repository;
 using RM.CarteResto.Remote.Contracts;
 using RM.CarteResto.Service.Services;
 using RM.DemandeCarteResto.Abstraction.Repositories;
-using RM.DemandeCarteResto.Business.Commands;
-using RM.DemandeCarteResto.Business.Queries;
 using RM.DemandeCarteResto.Data.Data;
 using RM.DemandeCarteResto.Data.Repository;
-using RM.Notif.Abstraction.Commands;
-using RM.Notif.Abstraction.Queries;
 using RM.Notif.Abstraction.Repository;
 using RM.Notif.Business.Commands;
 using RM.Notif.Business.Queries;
 using RM.Notif.Data.Repository;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -66,10 +61,9 @@ builder.Services.AddDbContext<CarteRestoContext>(options =>
 });
 builder.Services.AddScoped<ICarteRestoRepository, CarteRestoRepository>();
 builder.Services.AddCarteRestoGrpcClient();
+builder.Services.AddDemandCardServices();
 builder.Services.AddScoped<ICarteRestoService, CarteRestoServiceGRPC>();
 builder.Services.AddScoped<IDemandeCarteRestoRepository, DemandeCarteRestoRepository>();
-builder.Services.AddScoped<DemandeCarteRestoQueries>();
-builder.Services.AddScoped<DemandeCarteRestoCommands>();
 builder.Services.AddDbContext<NotificationContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);

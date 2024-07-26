@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RM.Transaction.Business.Queries;
 using RM.Transaction.Model.Entity;
 
 namespace API

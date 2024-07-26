@@ -10,10 +10,7 @@ namespace RM.CarteResto.Abstraction.Repositories
         Task<CarteRestaurant> GetCard(string partitionKey);
         Task<IEnumerable<CarteRestaurant>> GetAllCards();
         Task RemoveCard(string partitionkey);
-        Task ChargeCard(string partitionkey, float montant, string IdTransaction);
-        Task DischargeCard(string partitionkey, float montant, string IdTransaction);
 
         Task UpdateCard(string partitionkey, CarteRestaurant card);
-        Task DecrementCardSolde(string partitionkey, float montant);
     }
 }

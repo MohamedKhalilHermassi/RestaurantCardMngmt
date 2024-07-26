@@ -14,16 +14,7 @@ namespace RM.DemandeCarteResto.Data.Repository
         {
             _context = context;
         }
-        public async Task AcceptDemandeCard(string partitionkey)
-        {
-            var demand = await _context.DemandesCarteRestaurant.FindAsync(partitionkey);
-            if (demand == null)
-            {
-                throw new KeyNotFoundException($"DemandeCard with ID {partitionkey} not found");
-            }
-            demand.Status = true;
-            await _context.SaveChangesAsync();
-        }
+  
         public async Task<DemandeCarteRestaurant> AddDemandeCarte(DemandeCarteRestaurant demandeCarteResto)
         {
             if (demandeCarteResto == null)
@@ -65,17 +56,7 @@ namespace RM.DemandeCarteResto.Data.Repository
             return await _context.DemandesCarteRestaurant.Where(d => d.UserId == UserId).ToListAsync();
         }
 
-        public async Task RejectDemandeCard(string partitionkey)
-        {
-            var card = await _context.DemandesCarteRestaurant.FindAsync(partitionkey);
-            if (card == null)
-            {
-                throw new KeyNotFoundException($"DemandeCard with ID {partitionkey} not found");
-            }
-            card.Status = false;
-          
-            await _context.SaveChangesAsync();
-        }
+      
 
         public async Task RemoveDemandeCard(string partitionkey)
         {
