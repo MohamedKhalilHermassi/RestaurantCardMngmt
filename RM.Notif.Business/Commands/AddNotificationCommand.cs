@@ -1,7 +1,7 @@
-﻿using RM.Notif.Abstraction.Repository;
-using RM.Notif.Model.Entities;
+﻿using Abstraction;
+using Model;
 
-namespace RM.Notif.Business.Commands
+namespace Business
 {
     public class AddNotificationCommand
     {

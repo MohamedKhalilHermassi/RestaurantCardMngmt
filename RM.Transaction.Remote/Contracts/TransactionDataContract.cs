@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace RM.Transaction.Remote.Contracts
+namespace Remote
 {
     [DataContract]
     public class TransactionByIdRequest

@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RM.Transaction.Data.Data;
-using RM.CarteResto.Data.Data;
-using RM.CarteResto.Abstraction.Repositories;
-using RM.CarteResto.Data.Repository;
-using RM.CarteResto.Remote.Contracts;
-using RM.CarteResto.Service.Services;
+using Abstraction;
+using Data;
+using Remote;
+using Service;
+using Business;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,7 +45,7 @@ builder.Services.AddControllers().AddJsonOptions(opt =>
 });
 
 builder.Services.AddTransactionServices();
-
+builder.Services.AddScoped<DecrementBalanceCommand>();
 
 
 builder.Services.AddDbContext<CarteRestoContext>(options =>

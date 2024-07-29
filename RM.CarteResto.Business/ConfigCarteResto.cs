@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RM.CarteResto.Abstraction.Repositories;
+﻿using Abstraction;
+using Business;
+using Data;
+using Microsoft.Extensions.DependencyInjection;
+using Remote;
 using RM.CarteResto.Business.Commands;
-using RM.CarteResto.Business.Queries;
-using RM.CarteResto.Data.Repository;
-using RM.Transaction.Abstraction.Repositories;
-using RM.Transaction.Business;
-using RM.Transaction.Remote.Contracts;
-using RM.Transaction.Remote.Extension;
-using RM.Transaction.Service.Services;
+using Service;
 
 public static class ConfigCarteResto
 {
@@ -16,6 +13,8 @@ public static class ConfigCarteResto
         // REPO
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<ICarteRestoRepository, CarteRestoRepository>();
+        
+        // GRPC 
         services.AddTransactionGrpcClient();
         services.AddScoped<TransactionServiceGRPC>();
         services.AddScoped<ITransactionServiceContract, TransactionServiceGRPC>();

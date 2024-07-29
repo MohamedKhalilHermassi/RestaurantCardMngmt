@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RM.DemandeCarteResto.Business.Queries;
-using RM.DemandeCarteResto.Model.Entity;
+using Business;
+using Model;
 
-namespace RM.DemandeCarteResto.API.Controllers.QueriesController
+namespace API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,14 +25,14 @@ namespace RM.DemandeCarteResto.API.Controllers.QueriesController
         }
 
         [HttpGet]
-       // [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<List<DemandeCarteRestaurant>>> GetAllDemandesCards()
         {
             var demandesCards = await _getAllDemandesCardsQuery.ExecuteAsync();
             return Ok(demandesCards);
         }
         [HttpGet("pending")]
-    //    [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<List<DemandeCarteRestaurant>>> GetAllPendingDemandesCards()
         {
             var pendingDemandesCards = await _getAllPendingDemandsQuery.ExecuteAsync();
@@ -62,7 +62,7 @@ namespace RM.DemandeCarteResto.API.Controllers.QueriesController
             return Ok(demandeCard);
         }
         [HttpGet("getDemandeByUserId/{id}")]
-      //  [Authorize]
+        [Authorize]
         public async Task<ActionResult<DemandeCarteRestaurant>> GetDemandeByUserId(string id)
         {
             var demandeCard = await _getDemandeCardByUserIdQuery.ExecuteAsync(id);

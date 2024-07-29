@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RM.DemandeCarteResto.Model.Entity
+namespace Model
 {
     public class DemandeCarteRestaurant
     {

@@ -1,7 +1,7 @@
-﻿using RM.DemandeCarteResto.Abstraction.Repositories;
-using RM.DemandeCarteResto.Model.Entity;
+﻿using Abstraction;
+using Model;
 
-namespace RM.DemandeCarteResto.Business.Commands
+namespace Business
 {
     public class UpdateCardRestoCommand
     {

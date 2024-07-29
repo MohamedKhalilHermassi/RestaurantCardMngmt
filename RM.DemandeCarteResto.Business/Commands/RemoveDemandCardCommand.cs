@@ -1,11 +1,6 @@
-﻿using RM.DemandeCarteResto.Abstraction.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abstraction;
 
-namespace RM.DemandeCarteResto.Business.Commands
+namespace Business
 {
     public class RemoveDemandCardCommand
     {

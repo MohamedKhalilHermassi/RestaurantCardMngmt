@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RM.CarteResto.Business.Queries;
-using RM.CarteResto.Model.Entitiy;
+using Business;
+using Model;
 
 
-namespace RM.CarteResto.API.Controllers.QueriesController
+namespace API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,7 +25,7 @@ namespace RM.CarteResto.API.Controllers.QueriesController
         }
 
         [HttpGet]
-    //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<CarteRestaurant>>> GetAllCards()
         {
             var cards = await _getAllCardsQuery.ExecuteAsync();
@@ -56,7 +56,7 @@ namespace RM.CarteResto.API.Controllers.QueriesController
             return Ok(transaction);
         }
         [HttpGet("getCardByUserId/{id}")]
-     // [Authorize]
+        [Authorize]
         public async Task<ActionResult<CarteRestaurant>> GetCardByUserId(string id)
         {
             var card = await _getCardByUserIdQuery.ExecuteAsync(id);

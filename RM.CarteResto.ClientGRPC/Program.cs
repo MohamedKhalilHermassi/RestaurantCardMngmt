@@ -1,7 +1,7 @@
 ﻿using Grpc.Net.Client;
 using ProtoBuf.Grpc.Client;
 using Google.Protobuf.WellKnownTypes;
-using RM.CarteResto.Remote.Contracts;
+using Remote;
 namespace GrpcTransactionClient;
 internal class Program
 {

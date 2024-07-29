@@ -1,19 +1,14 @@
+using Abstraction;
+using Business;
+using Data;
+using EmailClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RM.CarteResto.Abstraction.Repositories;
-using RM.CarteResto.Data.Data;
-using RM.CarteResto.Data.Repository;
-using RM.CarteResto.Remote.Contracts;
-using RM.CarteResto.Service.Services;
-using RM.DemandeCarteResto.Abstraction.Repositories;
-using RM.DemandeCarteResto.Data.Data;
-using RM.DemandeCarteResto.Data.Repository;
-using RM.Notif.Abstraction.Repository;
-using RM.Notif.Business.Commands;
-using RM.Notif.Business.Queries;
-using RM.Notif.Data.Repository;
+using NotifCLient;
+using Remote;
+using Service;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -32,7 +27,7 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader()
                 .AllowCredentials();
 
-});
+        });
 });
 
 builder.Services.AddControllers();
@@ -59,18 +54,26 @@ builder.Services.AddDbContext<CarteRestoContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
+builder.Services.AddDbContext<EmailNotificationContext>(options =>
+{
+    options.UseCosmos(accountEndpoint, accountKey, databaseName);
+});
+builder.Services.AddDbContext<DemandeCarteRestoContext>(options =>
+{
+    options.UseCosmos(accountEndpoint, accountKey, databaseName);
+});
+builder.Services.AddScoped<DecrementBalanceCommand>();
+builder.Services.AddEmailServices();
 builder.Services.AddScoped<ICarteRestoRepository, CarteRestoRepository>();
 builder.Services.AddCarteRestoGrpcClient();
 builder.Services.AddDemandCardServices();
 builder.Services.AddScoped<ICarteRestoService, CarteRestoServiceGRPC>();
-builder.Services.AddScoped<IDemandeCarteRestoRepository, DemandeCarteRestoRepository>();
 builder.Services.AddDbContext<NotificationContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
-builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
-builder.Services.AddScoped<NotificationCommands>();
-builder.Services.AddScoped<NotificationQueries>();
+builder.Services.AddNotificationsServices();
+builder.Services.AddNotifClientServices();
 
 
 var validIssuer = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidIssuer");

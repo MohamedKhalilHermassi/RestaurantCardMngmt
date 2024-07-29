@@ -1,12 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using RM.Transaction.Abstraction.Repositories;
-using RM.Transaction.Data.Data;
-using RM.Transaction.Model.Entity;
-using System.Collections.Concurrent;
-using System.Runtime.InteropServices.Marshalling;
+﻿using Abstraction;
+using Microsoft.EntityFrameworkCore;
+using Model;
 
-namespace RM.Transaction.Business
+namespace Data
 {
     public class TransactionRepository : ITransactionRepository
     {

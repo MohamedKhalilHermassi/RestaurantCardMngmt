@@ -3,7 +3,7 @@ using ProtoBuf.Grpc;
 using System.ServiceModel;
 
 
-namespace RM.CarteResto.Remote.Contracts
+namespace Remote
 {
     [ServiceContract]
     public interface ICarteRestoService

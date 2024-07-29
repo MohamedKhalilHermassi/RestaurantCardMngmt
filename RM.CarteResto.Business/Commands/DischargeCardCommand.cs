@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
-using RM.CarteResto.Abstraction.Repositories;
-using RM.Transaction.Remote.Contracts;
-using RM.Transaction.Service.Services;
+﻿using Abstraction;
+using Remote;
+using Service;
 
-namespace RM.CarteResto.Business.Commands
+namespace Business
 {
     public class DischargeCardCommand
     {

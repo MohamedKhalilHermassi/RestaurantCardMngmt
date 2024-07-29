@@ -1,6 +1,6 @@
-﻿using RM.CarteResto.Abstraction.Repositories;
+﻿using Abstraction;
 
-namespace RM.CarteResto.Business.Commands
+namespace Business
 {
     public class RemoveCardCommand
     {

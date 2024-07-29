@@ -1,7 +1,7 @@
-﻿using RM.Notif.Abstraction.Repository;
-using RM.Notif.Model.Entities;
+﻿using Abstraction;
+using Model;
 
-namespace RM.Notif.Business.Queries
+namespace Business
 {
     public class GetAllNotificationsByReceiverIdQuery
     {
@@ -11,7 +11,7 @@ namespace RM.Notif.Business.Queries
         {
             _notificationRepository = notificationRepository;
         }
-        public async Task<IEnumerable<Notification>> ExecuteAsync(string role)
+        public async Task<IEnumerable<Notification>> ExecuteAsync(string partitionKey)
         {
             return await _notificationRepository.GetAllNotificationByReceiverId(partitionKey);
 

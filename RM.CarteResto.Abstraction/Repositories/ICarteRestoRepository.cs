@@ -1,7 +1,6 @@
-﻿using RM.CarteResto.Model.Entitiy;
+﻿using Model;
 
-
-namespace RM.CarteResto.Abstraction.Repositories
+namespace Abstraction
 {
     public interface ICarteRestoRepository
     {

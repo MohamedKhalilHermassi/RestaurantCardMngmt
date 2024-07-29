@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace RM.Notif.Model.Entities
+namespace Model
 {
     public class Notification
     {

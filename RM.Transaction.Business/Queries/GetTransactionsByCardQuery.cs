@@ -1,6 +1,5 @@
-﻿
-using RM.Transaction.Abstraction.Repositories;
-using RM.Transaction.Model.Entity;
+﻿using Abstraction;
+using Model;
 
 namespace Business
 {

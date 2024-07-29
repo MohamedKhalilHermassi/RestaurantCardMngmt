@@ -1,6 +1,6 @@
-﻿using RM.Transaction.Model.Entity;
+﻿using Model;
 
-namespace RM.Transaction.Abstraction.Repositories
+namespace Abstraction
 {
     public interface ITransactionRepository
     {

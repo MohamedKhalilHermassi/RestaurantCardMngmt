@@ -2,13 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RM.CarteResto.Data.Data;
-using RM.Transaction.Abstraction.Repositories;
-using RM.Transaction.Business;
-using RM.Transaction.Data.Data;
-using RM.Transaction.Remote.Contracts;
-using RM.Transaction.Remote.Extension;
-using RM.Transaction.Service.Services;
+using Abstraction;
+using Data;
 using System.Text;
 using System.Text.Json.Serialization;
 

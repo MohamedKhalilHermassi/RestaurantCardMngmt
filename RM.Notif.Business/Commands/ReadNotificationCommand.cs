@@ -1,6 +1,6 @@
-﻿using RM.Notif.Abstraction.Repository;
+﻿using Abstraction;
 
-namespace RM.Notif.Business.Commands
+namespace Business
 {
     public class ReadNotificationCommand
     {

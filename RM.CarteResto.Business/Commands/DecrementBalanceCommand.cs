@@ -1,12 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RM.CarteResto.Abstraction.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abstraction;
 
-namespace RM.CarteResto.Business.Commands
+namespace Business
 {
     public class DecrementBalanceCommand
     {

@@ -1,34 +1,33 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EmailClient;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Client;
-using RM.DemandeCarteResto.Business.Commands;
-using RM.DemandeCarteResto.Model.Entity;
-using RM.Notif.Business.Commands;
-using RM.Notif.Business.Queries;
-using RM.Notif.Model.Entities;
+using NotificationsClient;
+using Business;
+using Model;
+using Microsoft.AspNetCore.Authorization;
 
-namespace RM.DemandeCarteResto.API.Controllers.CommandsController
+namespace API
 {
     [Route("api/[controller]")]
     [ApiController]
     public class DemandeCardCommandsController : ControllerBase
     {
-        private readonly NotificationCommands notificationCommands;
-        private readonly NotificationQueries notifcationQueries; 
-        private readonly HubConnection _hubConnection;
-        AcceptDemandCardCommand _acceptDemandCardCommand;
-        AddDemandCardCommand _addDemandCardCommand;
-        RejectDemandCardCommand _rejectDemandCardCommand;
-        RemoveDemandCardCommand _removeDemandCardCommand;
-        UpdateCardRestoCommand _updateCardRestoCommand;
-
+        private readonly AcceptDemandCardCommand _acceptDemandCardCommand;
+        private readonly AddDemandCardCommand _addDemandCardCommand;
+        private readonly RejectDemandCardCommand _rejectDemandCardCommand;
+        private readonly RemoveDemandCardCommand _removeDemandCardCommand;
+        private readonly UpdateCardRestoCommand _updateCardRestoCommand;
+        private readonly AddNotificationCommand _addNotificationCommand;
+        private readonly ClientEmail _clientEmail;
+        private readonly ClientSignalR _clientSignalR;
         public DemandeCardCommandsController(
-            NotificationCommands _notificationCommands,
             AcceptDemandCardCommand acceptDemandCardCommand,
+            AddNotificationCommand addNotificationCommand,
             AddDemandCardCommand addDemandCardCommand,
             RejectDemandCardCommand rejectDemandCardCommand,
             RemoveDemandCardCommand removeDemandCardCommand,
-            UpdateCardRestoCommand updateCardRestoCommand
+            UpdateCardRestoCommand updateCardRestoCommand,
+            ClientEmail clientEmail,
+            ClientSignalR clientSignalR
             )
         {
             _addDemandCardCommand = addDemandCardCommand;
@@ -36,16 +35,16 @@ namespace RM.DemandeCarteResto.API.Controllers.CommandsController
             _rejectDemandCardCommand = rejectDemandCardCommand;
             _removeDemandCardCommand = removeDemandCardCommand;
             _updateCardRestoCommand = updateCardRestoCommand;
-            var hubUrl = "https://localhost:7279/notificationHub";
-            notificationCommands = _notificationCommands;
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl(hubUrl)
-                .Build();
+            _addNotificationCommand = addNotificationCommand;
+            _clientEmail = clientEmail;
+            _clientSignalR = clientSignalR;
+
+
 
         }
 
         [HttpPost]
-        public async Task<ActionResult<DemandeCarteRestaurant>> addDemandeCarteResto(DemandeCarteRestaurant demandeCard)
+        public async Task<ActionResult<DemandeCarteRestaurant>> AddDemandeCarteResto(DemandeCarteRestaurant demandeCard)
         {
             var id = Guid.NewGuid();
            var res =  await _addDemandCardCommand.ExecuteAsync(demandeCard);
@@ -61,34 +60,34 @@ namespace RM.DemandeCarteResto.API.Controllers.CommandsController
                     Message = "Une nouvelle demande de carte restaurant a été déposée.",
                     ReceiverId = "admin@admin.com"
                 };
-               // await notificationCommands.addNotification(newNotif);
 
-               // await _hubConnection.StartAsync(); 
-               // await _hubConnection.InvokeAsync("ReceiveMessage");
+                // await _hubConnection.StartAsync(); 
+                // await _hubConnection.InvokeAsync("ReceiveMessage");
 
-
-                return CreatedAtAction(nameof(addDemandeCarteResto), new { id = demandeCard.Id }, demandeCard);
+               // await _clientEmail.SendEmail("khalilherma6@gmail.com", "1234");
+                await _clientSignalR.AdminAlert(newNotif);
+                return CreatedAtAction(nameof(AddDemandeCarteResto), new { id = demandeCard.Id }, demandeCard);
 
             }
         }
                 
         [HttpDelete("{partitionkey}")]
-        public async Task<IActionResult> deleteDemandeCard(string partitionkey)
+        public async Task<IActionResult> DeleteDemandeCard(string partitionkey)
         {
             await _removeDemandCardCommand.ExecuteAsync(partitionkey);
             return NoContent();
         }
 
         [HttpPut("{partitionkey}")]
-        public async Task<IActionResult> updateDemandeCard(string partitionkey, DemandeCarteRestaurant demandeCard)
+        public async Task<IActionResult> UpdateDemandeCard(string partitionkey, DemandeCarteRestaurant demandeCard)
         {
             await _updateCardRestoCommand.ExecuteAsync(partitionkey, demandeCard);
             return NoContent();
 
         }
         [HttpPut("approve/{partitionkey}")]
-      //  [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> approveDemandeCard(string partitionkey)
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> ApproveDemandeCard(string partitionkey)
         {
             await _acceptDemandCardCommand.ExecuteAsync(partitionkey);
 
@@ -99,9 +98,9 @@ namespace RM.DemandeCarteResto.API.Controllers.CommandsController
 
         }
         [HttpPut("reject/{partitionkey}")]
-      //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
 
-        public async Task<IActionResult> rejectDemandeCard(string partitionkey)
+        public async Task<IActionResult> RejectDemandeCard(string partitionkey)
         {
             await _rejectDemandCardCommand.ExecuteAsync(partitionkey);
          //   await _hubConnection.StartAsync();
