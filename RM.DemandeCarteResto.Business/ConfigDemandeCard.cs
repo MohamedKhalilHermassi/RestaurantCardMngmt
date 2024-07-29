@@ -11,6 +11,8 @@ public static class ConfigDemandeCard
     public static IServiceCollection AddDemandCardServices(this IServiceCollection services)
     {
       
+        //comment
+
         services.AddScoped<IDemandeCarteRestoRepository,DemandeCarteRestoRepository>();
         services.AddCarteRestoGrpcClient();
         services.AddScoped<ICarteRestoService, CarteRestoServiceGRPC>();

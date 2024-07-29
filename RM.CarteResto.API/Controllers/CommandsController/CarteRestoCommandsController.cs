@@ -35,30 +35,51 @@ namespace API
             _transactionService = transactionService;
         }
 
+        /// <summary>
+        /// Créer une nouvelle carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de créer une nouvelle carte restaurant pour un utilisateur spécifié.
+        /// </remarks>
         [HttpPost]
-        public async Task<ActionResult<CarteRestaurant>> addCard(CarteRestaurant card)
+        public async Task<ActionResult<CarteRestaurant>> AddCard(CarteRestaurant card)
         {
             await _addCardCommand.ExecuteAsync(card);
-            return CreatedAtAction(nameof(addCard), new { id = card.Id }, card);
+            return CreatedAtAction(nameof(AddCard), new { id = card.Id }, card);
         }
-
+        /// <summary>
+        /// Supprimer une carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de supprimer une carte restaurant en utilisant son identifiant unique (partitionKey).
+        /// </remarks>
         [HttpDelete("{partitionkey}")]
-        public async Task<IActionResult> deleteCard(string partitionkey)
+        public async Task<IActionResult> DeleteCard(string partitionkey)
         {
             await _removeCardCommand.ExecuteAsync(partitionkey);
             return NoContent();
         }
-
+        /// <summary>
+        /// Modifier une carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de modifier une carte restaurant en utilisant son identifiant unique (partitionKey).
+        /// </remarks>
         [HttpPut("{partitionkey}")]
-        public async Task<IActionResult> updateCard(string partitionkey, CarteRestaurant card)
+        public async Task<IActionResult> UpdateCard(string partitionkey, CarteRestaurant card)
         {
             await _updateCardCommand.ExecuteAsync(partitionkey, card);
             return NoContent();
         }
-
+        /// <summary>
+        /// Recharger une carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de recharger une carte restaurant. Elle prend 2 paramètres : l'identifiant de la carté à recharger et le montant de la recharge entré par l'administrateur.
+        /// </remarks>
         [HttpPut("chargeCard/{partitionkey}/{montant}")]
         [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> chargeCard(string partitionkey, float montant)
+        public async Task<IActionResult> ChargeCard(string partitionkey, float montant)
         {
             
             await _chargeCardCommand.ExecuteAsync(partitionkey, montant);    
@@ -66,7 +87,12 @@ namespace API
             return NoContent();
 
         }
-
+        /// <summary>
+        /// Décharger une carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de décharger une carte restaurant. Elle prend 3 paramètres : l'identifiant de la carté à recharger ,le montant et le description de la transaction. Cette méthode implique aussi la création d'une transaction relative à cette carte restaruant spécifique ayant les mêmes valeurs {montant, desctiption}.
+        /// </remarks>
         [HttpPut("dischargeCard/{partitionkey}/{montant}/{description}")]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> DischargeCard(string partitionkey, float montant,string description)

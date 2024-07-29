@@ -6,6 +6,7 @@ using Model;
 
 namespace API
 {
+  
     [Route("api/[controller]")]
     [ApiController]
     public class CarteRestoQueriesController : ControllerBase
@@ -23,7 +24,12 @@ namespace API
             _getCardByUserIdQuery = getCardByUserIdQuery;
             _getCardQuery = getCardQuery;
         }
-
+        /// <summary>
+        /// Retourner toutes les cartes restaurants
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner toutes les cartes restaurant présentes dans la base de données.
+        /// </remarks>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<CarteRestaurant>>> GetAllCards()
@@ -45,6 +51,12 @@ namespace API
 
                   }*/
 
+        /// <summary>
+        /// Retourner une carte restaurant spécifique
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner une carte restaurant spécifique selon son identifiant.
+        /// </remarks>
         [HttpGet("{partitionkey}")]
         public async Task<ActionResult<CarteRestaurant>> GetCardById(string partitionkey)
         {
@@ -55,6 +67,12 @@ namespace API
             }
             return Ok(transaction);
         }
+        /// <summary>
+        /// Retourner la carte restaurant d'un utilisateur donné
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner la carte restaurant d'un utilisateur spécifique selon son identifiant.
+        /// </remarks>
         [HttpGet("getCardByUserId/{id}")]
         [Authorize]
         public async Task<ActionResult<CarteRestaurant>> GetCardByUserId(string id)
