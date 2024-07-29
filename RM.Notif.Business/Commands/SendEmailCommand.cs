@@ -1,6 +1,6 @@
-﻿using RM.Notif.Abstraction.Repository;
+﻿using Abstraction;
 
-namespace RM.Notif.Business.Commands
+namespace Business
 {
     public class SendEmailCommand
     {
@@ -10,9 +10,9 @@ namespace RM.Notif.Business.Commands
         {
             _emailNotificationRepository = emailNotificationRepository;
         }
-        public async Task ExecuteAsync(string ReceiverEmail, string NotifId)
+        public async Task ExecuteAsync(string receiverEmail, string notifPartitionKey)
         {
-            await _emailNotificationRepository.SendEmailNotification(ReceiverEmail, NotifId);
+            await _emailNotificationRepository.SendEmailNotification(receiverEmail, notifPartitionKey);
         }
     }
 }

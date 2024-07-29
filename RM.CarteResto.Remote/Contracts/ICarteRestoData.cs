@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace RM.CarteResto.Remote.Contracts
+namespace Remote
 {
         [DataContract]
         public class CarteRestoByIdRequest

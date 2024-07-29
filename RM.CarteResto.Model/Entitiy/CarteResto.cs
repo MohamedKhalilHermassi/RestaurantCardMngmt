@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RM.CarteResto.Model.Entitiy
+namespace Model
 {
     public class CarteRestaurant
     {

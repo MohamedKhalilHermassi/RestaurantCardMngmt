@@ -1,4 +1,4 @@
-﻿using RM.Transaction.Abstraction.Repositories;
+﻿using Abstraction;
 
 
 namespace Business

@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RM.User.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 namespace RM.User.Data.Data
 {
     public class UserContext:DbContext

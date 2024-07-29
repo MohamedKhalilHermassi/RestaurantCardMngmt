@@ -1,7 +1,7 @@
 ﻿using Business;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RM.Transaction.Model.Entity;
+using Model;
 
 namespace API
 {
@@ -28,7 +28,7 @@ namespace API
         }
         
         [HttpGet]
-        [Authorize]
+      //  [Authorize]
         public async Task<ActionResult<List<Transactions>>> GetAllTransactions()
         {
             var transactions = await _getAllTransactionsQuery.ExecuteAsync();

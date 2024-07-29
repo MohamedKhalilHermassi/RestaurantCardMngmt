@@ -1,7 +1,6 @@
-﻿using RM.DemandeCarteResto.Abstraction.Repositories;
+﻿using Abstraction;
 
-
-namespace RM.DemandeCarteResto.Business.Commands
+namespace Business
 {
     public class RejectDemandCardCommand
     {

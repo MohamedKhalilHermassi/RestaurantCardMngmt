@@ -1,5 +1,5 @@
-﻿using RM.CarteResto.Abstraction.Repositories;
-using RM.CarteResto.Model.Entitiy;
+﻿using Abstraction;
+using Model;
 
 namespace RM.CarteResto.Business.Commands
 {

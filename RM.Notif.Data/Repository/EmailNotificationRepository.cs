@@ -1,11 +1,10 @@
-﻿using RM.Notif.Abstraction.Repository;
-using RM.Notif.Model.Entities;
+﻿using Abstraction;
+using Model;
 using System.Net.Mail;
 using System.Net;
-using RM.DemandeCarteResto.Data.Data;
 
 
-namespace RM.Notif.Data.Repository
+namespace Data
 {
     public class EmailNotificationRepository : IEmailNotificationRepository
     {

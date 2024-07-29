@@ -1,12 +1,7 @@
-﻿using RM.DemandeCarteResto.Abstraction.Repositories;
-using RM.DemandeCarteResto.Model.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abstraction;
+using Model;
 
-namespace RM.DemandeCarteResto.Business.Queries
+namespace Business
 {
     public class GetAllPendingDemandsQuery
     {

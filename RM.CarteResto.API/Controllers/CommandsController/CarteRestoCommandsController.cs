@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RM.CarteResto.Business.Commands;
-using RM.CarteResto.Model.Entitiy;
-using RM.Transaction.Remote.Contracts;
+using Model;
+using Remote;
+using Business;
 
-namespace RM.CarteResto.API.Controllers.CommandsController
+namespace API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -56,7 +57,7 @@ namespace RM.CarteResto.API.Controllers.CommandsController
         }
 
         [HttpPut("chargeCard/{partitionkey}/{montant}")]
-    //    [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> chargeCard(string partitionkey, float montant)
         {
             
@@ -67,7 +68,7 @@ namespace RM.CarteResto.API.Controllers.CommandsController
         }
 
         [HttpPut("dischargeCard/{partitionkey}/{montant}/{description}")]
-       // [Authorize(Roles = "User")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> DischargeCard(string partitionkey, float montant,string description)
         {
           

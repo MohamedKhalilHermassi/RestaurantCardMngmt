@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RM.Transaction.Model.Entity;
+using Model;
 
-namespace RM.Transaction.Data.Data
+namespace Data
 {
     public class TransactionContext : DbContext
     {

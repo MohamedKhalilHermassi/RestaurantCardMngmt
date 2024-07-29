@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RM.CarteResto.Model.Entitiy;
+using Model;
 
-namespace RM.CarteResto.Data.Data
+namespace Data
 {
     public class CarteRestoContext: DbContext
     {

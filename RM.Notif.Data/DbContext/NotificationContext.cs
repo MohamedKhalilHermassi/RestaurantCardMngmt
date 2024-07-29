@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RM.Notif.Model.Entities;
+using Model;
 
-namespace RM.DemandeCarteResto.Data.Data
+namespace Data
 {
     public class NotificationContext : DbContext    
     {

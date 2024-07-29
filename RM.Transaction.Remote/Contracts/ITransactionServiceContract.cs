@@ -1,7 +1,8 @@
 ﻿using ProtoBuf.Grpc;
 using System.ServiceModel;
 using Google.Protobuf.WellKnownTypes;
-namespace RM.Transaction.Remote.Contracts
+
+namespace Remote
 {
     [ServiceContract]
     public interface ITransactionServiceContract

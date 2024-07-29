@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RM.CarteResto.Remote.Contracts;
+using Remote;
 
 public static class GrpcConfig
 {

@@ -1,7 +1,7 @@
-﻿using RM.DemandeCarteResto.Model.Entity;
+﻿using Model;
 
-namespace RM.DemandeCarteResto.Abstraction.Repositories
-{ 
+namespace Abstraction
+{
     public interface IDemandeCarteRestoRepository
     {
         Task<DemandeCarteRestaurant> AddDemandeCarte(DemandeCarteRestaurant DemandeCarteResto);

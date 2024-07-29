@@ -1,12 +1,12 @@
-﻿using Google.Protobuf.WellKnownTypes;
+﻿using Abstraction;
+using Business;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using Model;
 using ProtoBuf.Grpc;
-using RM.CarteResto.Abstraction.Repositories;
-using RM.CarteResto.Business.Commands;
-using RM.CarteResto.Model.Entitiy;
-using RM.CarteResto.Remote.Contracts;
+using Remote;
 
-namespace RM.CarteResto.Service.Services
+namespace Service
 {
     public class CarteRestoServiceGRPC : ICarteRestoService
     {
@@ -30,7 +30,7 @@ namespace RM.CarteResto.Service.Services
                 UserId = carteResto.UserId,
                 UserEmail = carteResto.UserEmail,
             };
-            var addedCard = await _carteRepo.AddCard(card);
+            var addedCard = await _carteRepo.AddCard (card);
             var reply = new CarteRestoByIdReply
             {
                 Id = Guid.NewGuid(),

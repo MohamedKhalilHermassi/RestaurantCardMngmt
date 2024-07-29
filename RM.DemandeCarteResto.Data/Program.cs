@@ -1,13 +1,9 @@
-﻿// Program.cs
+﻿using Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using RM.DemandeCarteResto.Data.Data;
-using RM.DemandeCarteResto.Model.Entity;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Model;
 
 class Program
 {

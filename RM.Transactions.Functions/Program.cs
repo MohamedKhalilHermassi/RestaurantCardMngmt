@@ -1,11 +1,9 @@
+using Abstraction;
+using Data;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RM.DemandeCarteResto.Data.Data;
-using RM.Notif.Abstraction.Repository;
-using RM.Notif.Business.Commands;
-using RM.Notif.Data.Repository;
 
 var host = new HostBuilder()
 
@@ -22,7 +20,6 @@ var host = new HostBuilder()
 
         // Register services
         services.AddScoped<IEmailNotificationRepository, EmailNotificationRepository>();
-        services.AddScoped<EmailNotifcationsCommands>();
 
         // Add Application Insights
         services.AddApplicationInsightsTelemetryWorkerService();

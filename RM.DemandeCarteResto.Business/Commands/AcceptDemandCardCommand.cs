@@ -1,7 +1,7 @@
-﻿using RM.CarteResto.Remote.Contracts;
-using RM.DemandeCarteResto.Abstraction.Repositories;
+﻿using Abstraction;
+using Remote;
 
-namespace RM.DemandeCarteResto.Business.Commands
+namespace Business
 {
     public class AcceptDemandCardCommand
     {

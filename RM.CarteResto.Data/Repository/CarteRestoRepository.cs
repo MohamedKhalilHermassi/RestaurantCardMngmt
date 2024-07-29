@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RM.CarteResto.Abstraction.Repositories;
-using RM.CarteResto.Data.Data;
-using RM.CarteResto.Model.Entitiy;
+﻿using Abstraction;
+using Microsoft.EntityFrameworkCore;
+using Model;
 
 
-namespace RM.CarteResto.Data.Repository
+namespace Data
 {
     public class CarteRestoRepository : ICarteRestoRepository
     {

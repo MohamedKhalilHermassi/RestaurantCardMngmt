@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RM.DemandeCarteResto.Data.Data;
-using RM.Notif.Abstraction.Repository;
-using RM.Notif.Model.Entities;
+using Abstraction;
+using Model;
 
 
-namespace RM.Notif.Data.Repository
+namespace Data
 {
     public class NotificationRepository : INotificationRepository
     {

@@ -3,11 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RM.DemandeCarteResto.Data.Data;
-using RM.Notif.Abstraction.Repository;
-using RM.Notif.Business.Commands;
-using RM.Notif.Business.Queries;
-using RM.Notif.Data.Repository;
+using Data;
 using System.Security.Claims;
 using System.Text;
 
@@ -37,6 +33,10 @@ var accountEndpoint = cosmosDbSettings["AccountEndpoint"];
 var accountKey = cosmosDbSettings["AccountKey"];
 var databaseName = cosmosDbSettings["DatabaseName"];
 builder.Services.AddDbContext<NotificationContext>(options =>
+{
+    options.UseCosmos(accountEndpoint, accountKey, databaseName);
+});
+builder.Services.AddDbContext<EmailNotificationContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });

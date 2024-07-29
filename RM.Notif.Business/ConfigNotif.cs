@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RM.Notif.Abstraction.Repository;
-using RM.Notif.Business.Commands;
-using RM.Notif.Business.Queries;
-using RM.Notif.Data.Repository;
+using Abstraction;
+using Business;
+using Data;
 
 public static class ConfigTransactions
 {

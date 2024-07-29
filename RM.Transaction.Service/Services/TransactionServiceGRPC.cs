@@ -1,12 +1,12 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using ProtoBuf.Grpc;
-using RM.Transaction.Abstraction.Repositories;
-using RM.Transaction.Model.Entity;
-using RM.Transaction.Remote.Contracts;
+using Abstraction;
+using Model;
+using Remote;
 
 
-namespace RM.Transaction.Service.Services
+namespace Service
 {
     public class TransactionServiceGRPC : ITransactionServiceContract
     {

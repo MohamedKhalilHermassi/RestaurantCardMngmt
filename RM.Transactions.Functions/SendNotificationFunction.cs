@@ -1,8 +1,7 @@
+using Business;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using RM.Notif.Business.Commands;
 using System.Text.Json;
 
 namespace RM.Transactions.Functions
@@ -10,11 +9,11 @@ namespace RM.Transactions.Functions
     public class SendNotificationFunction
     {
         private readonly ILogger<SendNotificationFunction> _logger;
-       private readonly EmailNotifcationsCommands _emailNotifcationsCommands;
-        public SendNotificationFunction(ILogger<SendNotificationFunction> logger, EmailNotifcationsCommands emailNotifcationsCommands)
+       private readonly SendEmailCommand _sendEmailCommand;
+        public SendNotificationFunction(ILogger<SendNotificationFunction> logger, SendEmailCommand sendEmailCommand)
         {
             _logger = logger;
-           _emailNotifcationsCommands = emailNotifcationsCommands;
+            _sendEmailCommand = sendEmailCommand;
         }
 
         [Function("sendEmailNotif")]
@@ -28,7 +27,7 @@ namespace RM.Transactions.Functions
                 var root = jsonDoc.RootElement;
                 string NotifId = root.GetProperty("Id").GetString();
                 string userEmail = root.GetProperty("Email").GetString();
-               await _emailNotifcationsCommands.SendEmailNotification(userEmail, NotifId);
+               await _sendEmailCommand.ExecuteAsync(userEmail, NotifId);
 
             }
             catch (Exception ex)

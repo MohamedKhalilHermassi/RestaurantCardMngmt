@@ -1,8 +1,8 @@
-﻿using RM.CarteResto.Abstraction.Repositories;
-using RM.Transaction.Remote.Contracts;
-using RM.Transaction.Service.Services;
+﻿using Abstraction;
+using Remote;
+using Service;
 
-namespace RM.CarteResto.Business.Commands
+namespace Business
 {
     public class ChargeCardCommand
     {
@@ -26,9 +26,7 @@ namespace RM.CarteResto.Business.Commands
                 Type = true
             };
             await _transactionService.addTransaction(trasnaction);
-            Console.WriteLine("Hello World!");
-
-            Console.WriteLine(partitionkey);
+            
             var IdTran = await _transactionService.getTransactionByCardId(partitionkey);
            
             var card = await _carteRestoRepository.GetCard(partitionkey);

@@ -1,8 +1,8 @@
 ﻿using Business;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RM.CarteResto.Remote.Contracts;
-using RM.Transaction.Model.Entity;
+using Remote;
+using Model;
 
 namespace API
 {

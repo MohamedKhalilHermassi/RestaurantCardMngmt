@@ -10,13 +10,14 @@
     <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="System.Net.WebSockets" Version="4.3.0" />
     <PackageReference Include="System.Net.WebSockets.WebSocketProtocol" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmailClient\EmailClient.csproj" />
+    <ProjectReference Include="..\NotificationsClient\NotificationsClient.csproj" />
     <ProjectReference Include="..\RM.CarteResto.Abstraction\RM.CarteResto.Abstraction.csproj" />
     <ProjectReference Include="..\RM.CarteResto.Data\RM.CarteResto.Data.csproj" />
     <ProjectReference Include="..\RM.CarteResto.Remote\RM.CarteResto.Remote.csproj" />

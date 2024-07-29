@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Abstraction;
 using Microsoft.EntityFrameworkCore;
-using RM.DemandeCarteResto.Abstraction.Repositories;
-using RM.DemandeCarteResto.Data.Data;
-using RM.DemandeCarteResto.Model.Entity;
+using Model;
 
-
-namespace RM.DemandeCarteResto.Data.Repository
+namespace Data
 {
     public class DemandeCarteRestoRepository : IDemandeCarteRestoRepository
     {

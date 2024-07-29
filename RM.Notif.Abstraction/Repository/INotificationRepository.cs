@@ -1,11 +1,6 @@
-﻿using RM.Notif.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Model;
 
-namespace RM.Notif.Abstraction.Repository
+namespace Abstraction
 {
     public interface INotificationRepository
     {

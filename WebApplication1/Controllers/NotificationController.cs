@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RM.Notif.Business.Commands;
-using RM.Notif.Business.Queries;
-using RM.Notif.Model.Entities;
+using Business;
+using Model;
 
-namespace RM.NotificationsServer.Controllers
+namespace API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,21 +11,25 @@ namespace RM.NotificationsServer.Controllers
     {
         ReadNotificationCommand _readNotificationCommand;
         GetAllNotificationsByReceiverIdQuery _getAllNotificationByReceiverId;
-            
-       
+
+        public NotificationController(ReadNotificationCommand readNotificationCommand, GetAllNotificationsByReceiverIdQuery getAllNotificationByReceiverId)
+        {
+            _readNotificationCommand = readNotificationCommand;
+            _getAllNotificationByReceiverId = getAllNotificationByReceiverId;
+        }
 
         [HttpGet("{admin}")]
         [Authorize(Roles ="Admin")]
         public async Task<IEnumerable<Notification>> getNotificationForAdmin(string admin)
         {
-            return await _notificationQueries.getAllNotificationByReceiverId(admin);
+            return await _getAllNotificationByReceiverId.ExecuteAsync(admin);
         }
 
       
         [HttpPut("readNotif/{partitionkey}")]
         public async Task readNotification(string partitionkey)
         {
-                await _notificationCommands.readNotification(partitionkey);
+                await _readNotificationCommand.ExecuteAsync(partitionkey);
         }
     }
 }
