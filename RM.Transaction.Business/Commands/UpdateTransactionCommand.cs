@@ -1,8 +1,8 @@
-﻿using Abstraction;
-using Model;
+﻿using RM.Transaction.Abstraction;
+using RM.Transaction.Model;
 
 
-namespace Business
+namespace RM.Transaction.Business
 {
     public class UpdateTransactionCommand
     {

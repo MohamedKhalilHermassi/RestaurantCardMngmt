@@ -1,6 +1,6 @@
-﻿using Abstraction;
+﻿using RM.Notifications.Abstraction;
 
-namespace Business
+namespace RM.Notifications.Business
 {
     public class ReadNotificationCommand
     {

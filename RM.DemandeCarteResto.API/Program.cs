@@ -1,14 +1,17 @@
-using Abstraction;
-using Business;
-using Data;
+using RM.CarteResto.Service;
 using EmailClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NotifCLient;
-using Remote;
-using Service;
+using RM.CarteResto.Abstraction;
+using RM.CarteResto.Business;
+using RM.CarteResto.Data;
+using RM.CarteResto.Remote;
+using RM.DemandeCarteResto.Data;
+using RM.Notifications.Data;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -116,6 +119,9 @@ builder.Services.AddAuthentication(options => {
 
 builder.Services.AddSwaggerGen(option =>
 {
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    option.IncludeXmlComments(xmlPath);
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Test API", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

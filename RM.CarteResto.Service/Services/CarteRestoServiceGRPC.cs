@@ -1,12 +1,12 @@
-﻿using Abstraction;
-using Business;
+﻿using RM.CarteResto.Abstraction;
+using RM.CarteResto.Business;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using Model;
+using RM.CarteResto.Model;
 using ProtoBuf.Grpc;
-using Remote;
+using RM.CarteResto.Remote;
 
-namespace Service
+namespace RM.CarteResto.Service
 {
     public class CarteRestoServiceGRPC : ICarteRestoService
     {
@@ -18,7 +18,7 @@ namespace Service
             _decrementBalanceCommand = decrementBalanceCommand;
         }
 
-        public async Task<CarteRestoByIdReply> addCarteResto(CarteRestoByIdReply carteResto)
+        public async Task<CarteRestoByIdReply> AddCarteResto(CarteRestoByIdReply carteResto)
         {
 
             var card = new CarteRestaurant
@@ -60,7 +60,7 @@ namespace Service
             return response;
         }
 
-        public async Task<CarteRestoByIdReply> getCarteRestoById(CarteRestoByIdRequest request, CallContext context = default)
+        public async Task<CarteRestoByIdReply> GetCarteRestoById(CarteRestoByIdRequest request, CallContext context = default)
         {
             var card = await _carteRepo.GetCard(request.PartitionKey);
 
@@ -81,7 +81,7 @@ namespace Service
             return response;
         }
 
-        public async Task<Empty> removeCarteResto(CarteRestoByIdRequest request, CallContext context = default)
+        public async Task<Empty> RemoveCarteResto(CarteRestoByIdRequest request, CallContext context = default)
         {
             var card = await _carteRepo.GetCard(request.PartitionKey);
             if (card == null)
@@ -93,18 +93,18 @@ namespace Service
             return new Empty();
         }
 
-        public async  Task<bool> verifyCarteRestoSolde(string id,float montant, CallContext context = default)
+        public async  Task<bool> VerifyCarteRestoSolde(string id,float montant, CallContext context = default)
         {
             var carte = new CarteRestoByIdRequest
             {
                 PartitionKey = id
             };
-           var carteResponse = await getCarteRestoById(carte);
-            if(carteResponse.Solde< montant)
+           var carteResponse = await GetCarteRestoById(carte);
+            if(carteResponse.Solde < montant)
             {
                 return false;
             }
-        
+            
             await _decrementBalanceCommand.ExecuteAsync(id, montant);
             return true;
         }

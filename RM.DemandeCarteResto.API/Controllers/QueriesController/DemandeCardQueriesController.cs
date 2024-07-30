@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Business;
-using Model;
+using RM.DemandeCarteResto.Business;
+using RM.DemandeCarteResto.Model;
 
-namespace API
+namespace RM.DemandeCarteResto.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,7 +23,12 @@ namespace API
             _getDemandCardByIdQuery = getDemandCardByIdQuery;
             _getDemandeCardByUserIdQuery = getDemandeCardByUserIdQuery;
         }
-
+        /// <summary>
+        /// Retourner toutes les demandes de carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de supprimer une demande de carte restaurant en spécifiant son identifiant.
+        /// </remarks>   
         [HttpGet]
         [Authorize(Roles ="Admin")]
         public async Task<ActionResult<List<DemandeCarteRestaurant>>> GetAllDemandesCards()
@@ -31,6 +36,12 @@ namespace API
             var demandesCards = await _getAllDemandesCardsQuery.ExecuteAsync();
             return Ok(demandesCards);
         }
+        /// <summary>
+        /// Retourner les demandes de carte restaurant ayant un statut en cours.
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner seulement les demandes de carte restaurant qui sont en cours de traitement.
+        /// </remarks>
         [HttpGet("pending")]
         [Authorize(Roles ="Admin")]
         public async Task<ActionResult<List<DemandeCarteRestaurant>>> GetAllPendingDemandesCards()
@@ -50,7 +61,12 @@ namespace API
              return Ok(reply);
 
          }*/
-
+        /// <summary>
+        /// Retourner une demande de carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner une demande de carte restaurant bien détérminée.
+        /// </remarks>   
         [HttpGet("{partitionkey}")]
         public async Task<ActionResult<DemandeCarteRestaurant>> GetDemandeCardById(string partitionkey)
         {
@@ -61,6 +77,12 @@ namespace API
             }
             return Ok(demandeCard);
         }
+        /// <summary>
+        /// Retourner la liste de demandes de carte restaurant 
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner la liste de demandes de carte retaurant relative à un utilisateur spécifique.
+        /// </remarks>   
         [HttpGet("getDemandeByUserId/{id}")]
         [Authorize]
         public async Task<ActionResult<DemandeCarteRestaurant>> GetDemandeByUserId(string id)

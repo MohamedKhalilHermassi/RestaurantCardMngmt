@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Abstraction;
-using Model;
+using RM.Notifications.Abstraction;
+using RM.Notifications.Model;
 
 
-namespace Data
+namespace RM.Notifications.Data
 {
     public class NotificationRepository : INotificationRepository
     {

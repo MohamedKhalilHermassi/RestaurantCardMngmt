@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Model
+namespace RM.Transaction.Model
 {
     public class Transactions
     {

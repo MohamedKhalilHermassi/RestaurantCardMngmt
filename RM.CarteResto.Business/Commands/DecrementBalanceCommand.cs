@@ -1,6 +1,6 @@
-﻿using Abstraction;
+﻿using RM.CarteResto.Abstraction;
 
-namespace Business
+namespace RM.CarteResto.Business
 {
     public class DecrementBalanceCommand
     {

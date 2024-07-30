@@ -1,8 +1,8 @@
-﻿using Abstraction;
-using Remote;
-using Service;
+﻿using RM.CarteResto.Abstraction;
+using RM.Transaction.Remote;
+using RM.Transaction.Service;
 
-namespace Business
+namespace RM.CarteResto.Business
 {
     public class ChargeCardCommand
     {

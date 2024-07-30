@@ -1,7 +1,7 @@
-﻿using Abstraction;
-using Remote;
+﻿using RM.CarteResto.Remote;
+using RM.DemandeCarteResto.Abstraction;
 
-namespace Business
+namespace RM.DemandeCarteResto.Business
 {
     public class AcceptDemandCardCommand
     {
@@ -47,7 +47,7 @@ namespace Business
                 UserId = foundDemand.UserId,
                 UserEmail = foundDemand.UserEmail
             };
-            await _carteRestoService.addCarteResto(cardResto);
+            await _carteRestoService.AddCarteResto(cardResto);
         }
     }
 }

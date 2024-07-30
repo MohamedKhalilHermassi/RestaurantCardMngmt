@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 
-namespace Remote
+namespace RM.Transaction.Remote
 {
     public static class GrpcConfigTransaction
     {

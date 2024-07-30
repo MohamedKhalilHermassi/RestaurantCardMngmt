@@ -1,9 +1,9 @@
-﻿using Business;
+﻿using RM.Transaction.Business;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Model;
+using RM.Transaction.Model;
 
-namespace API
+namespace RM.Transaction.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -26,15 +26,25 @@ namespace API
             _getAllTransactionsQuery = getAllTransactionsQuery;
             _getTransactionsByCardQuery = getTransactionsByCardQuery;
         }
-        
+        /// <summary>
+        /// Retourner toutes les tranasctions
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner toutes les transactions présentes dans la base de données.
+        /// </remarks>  
         [HttpGet]
-      //  [Authorize]
+        [Authorize]
         public async Task<ActionResult<List<Transactions>>> GetAllTransactions()
         {
             var transactions = await _getAllTransactionsQuery.ExecuteAsync();
             return Ok(transactions);
         }
-        
+        /// <summary>
+        /// Retourner une tranasction
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner une transaction en spécifiant son identifiant.
+        /// </remarks>  
         [HttpGet("{partitionKey}")]
         public async Task<ActionResult<Transactions>> GetTransaction(string partitionKey)
         {
@@ -45,7 +55,12 @@ namespace API
             }
             return Ok(transaction);
         }
-
+        /// <summary>
+        /// Retourner une tranasction
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner la liste des transactions effectuée par une carte restaurant spécifique. 
+        /// </remarks>  
         [HttpGet("getTransactionByCardResto/{id}")]
         [Authorize]
         public async Task<ActionResult<Transactions>> GetTransactionByCardResto(string id)

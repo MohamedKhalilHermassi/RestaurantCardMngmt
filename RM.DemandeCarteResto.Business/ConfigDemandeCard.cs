@@ -1,9 +1,9 @@
-﻿using Abstraction;
-using Business;
-using Data;
+﻿using RM.DemandeCarteResto.Abstraction;
+using RM.DemandeCarteResto.Business;
+using RM.DemandeCarteResto.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Remote;
-using Service;
+using RM.CarteResto.Service;
+using RM.CarteResto.Remote;
 
 
 public static class ConfigDemandeCard
@@ -11,7 +11,7 @@ public static class ConfigDemandeCard
     public static IServiceCollection AddDemandCardServices(this IServiceCollection services)
     {
       
-        //comment
+        
 
         services.AddScoped<IDemandeCarteRestoRepository,DemandeCarteRestoRepository>();
         services.AddCarteRestoGrpcClient();

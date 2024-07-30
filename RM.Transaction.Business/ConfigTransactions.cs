@@ -1,7 +1,7 @@
-﻿using Business;
+﻿using RM.Transaction.Business;
 using Microsoft.Extensions.DependencyInjection;
-using Abstraction;
-using Data;
+using RM.Transaction.Abstraction;
+using RM.Transaction.Data;
 public static class ConfigTransactions
 {
     public static IServiceCollection AddTransactionServices(this IServiceCollection services)

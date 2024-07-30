@@ -1,7 +1,7 @@
-﻿using Abstraction;
+﻿using RM.Transaction.Abstraction;
 
 
-namespace Business
+namespace RM.Transaction.Business
 {
     public class RemoveTransactionCommand
     {

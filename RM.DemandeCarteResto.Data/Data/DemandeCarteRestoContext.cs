@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Model;
+using RM.DemandeCarteResto.Model;
 
-namespace Data
+namespace RM.DemandeCarteResto.Data
 {
     public class DemandeCarteRestoContext: DbContext
     {

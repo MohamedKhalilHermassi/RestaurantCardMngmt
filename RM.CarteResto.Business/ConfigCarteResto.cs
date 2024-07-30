@@ -1,10 +1,11 @@
-﻿using Abstraction;
-using Business;
-using Data;
+﻿using RM.CarteResto.Abstraction;
+using RM.CarteResto.Business;
+using RM.CarteResto.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Remote;
-using RM.CarteResto.Business.Commands;
-using Service;
+using RM.Transaction.Remote;
+using RM.Transaction.Service;
+using RM.Transaction.Abstraction;
+using RM.Transaction.Data;
 
 public static class ConfigCarteResto
 {

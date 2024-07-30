@@ -1,7 +1,7 @@
-﻿using Abstraction;
-using Model;
+﻿using RM.DemandeCarteResto.Abstraction;
+using RM.DemandeCarteResto.Model;
 
-namespace Business
+namespace RM.DemandeCarteResto.Business
 {
     public class GetDemandeCardByUserIdQuery
     {

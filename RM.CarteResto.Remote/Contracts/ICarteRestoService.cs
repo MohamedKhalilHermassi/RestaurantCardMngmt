@@ -3,22 +3,22 @@ using ProtoBuf.Grpc;
 using System.ServiceModel;
 
 
-namespace Remote
+namespace RM.CarteResto.Remote
 {
     [ServiceContract]
     public interface ICarteRestoService
     {
         [OperationContract]
-        Task<CarteRestoByIdReply> getCarteRestoById(CarteRestoByIdRequest request, CallContext context = default);
+        Task<CarteRestoByIdReply> GetCarteRestoById(CarteRestoByIdRequest request, CallContext context = default);
 
         [OperationContract]
-        Task<CarteRestoByIdReply> addCarteResto(CarteRestoByIdReply carteResto);
+        Task<CarteRestoByIdReply> AddCarteResto(CarteRestoByIdReply carteResto);
 
         [OperationContract]
-        Task<Empty> removeCarteResto(CarteRestoByIdRequest request, CallContext context = default);
+        Task<Empty> RemoveCarteResto(CarteRestoByIdRequest request, CallContext context = default);
         [OperationContract]
         Task<AllCartesRestoReply> GetAllCarteResto(Empty request, CallContext context = default);
         [OperationContract]
-        Task<bool> verifyCarteRestoSolde(string id,float montant,CallContext context = default);
+        Task<bool> VerifyCarteRestoSolde(string id,float montant,CallContext context = default);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Model;
+using RM.Notifications.Model;
 
-namespace Data
+
+namespace RM.Notifications.Data
 {
     public class NotificationContext : DbContext    
     {

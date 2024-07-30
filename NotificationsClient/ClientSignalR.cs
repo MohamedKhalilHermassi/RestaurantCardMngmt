@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
-using Business;
-using Model;
+using RM.Notifications.Business;
+using RM.Notifications.Model;
+
 
 namespace NotificationsClient
 {
