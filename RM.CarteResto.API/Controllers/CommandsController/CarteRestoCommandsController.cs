@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RM.CarteResto.Business.Commands;
-using Model;
-using Remote;
-using Business;
+using RM.CarteResto.Business;
+using RM.CarteResto.Model;
+using RM.Transaction.Remote;
 
-namespace API
+namespace RM.CarteResto.API
 {
     [Route("api/[controller]")]
     [ApiController]

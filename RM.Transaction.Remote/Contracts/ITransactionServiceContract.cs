@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using Google.Protobuf.WellKnownTypes;
 
-namespace Remote
+namespace RM.Transaction.Remote
 {
     [ServiceContract]
     public interface ITransactionServiceContract

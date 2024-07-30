@@ -1,10 +1,12 @@
-﻿using Abstraction;
+﻿using RM.DemandeCarteResto.Abstraction;
 
-namespace Business
+namespace RM.DemandeCarteResto.Business
 {
     public class RejectDemandCardCommand
     {
-        private readonly IDemandeCarteRestoRepository _demandeCarteRepository;
+        #region field
+        private readonly IDemandeCarteRestoRepository _demandeCarteRepository; 
+        #endregion
 
         public RejectDemandCardCommand(IDemandeCarteRestoRepository demandeCarteRepository)
         {
@@ -22,5 +24,6 @@ namespace Business
 
             await _demandeCarteRepository.UpdateDemandeCard(card.PartitionKey, card);
         }
+
     }
 }

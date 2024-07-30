@@ -1,7 +1,7 @@
-﻿using Abstraction;
-using Model;
+﻿using RM.CarteResto.Abstraction;
+using RM.CarteResto.Model;
 
-namespace Business
+namespace RM.CarteResto.Business
 {
     public class GetAllCardsQuery
     {

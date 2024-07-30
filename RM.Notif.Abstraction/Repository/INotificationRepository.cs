@@ -1,6 +1,6 @@
-﻿using Model;
+﻿using RM.Notifications.Model;
 
-namespace Abstraction
+namespace RM.Notifications.Abstraction
 {
     public interface INotificationRepository
     {

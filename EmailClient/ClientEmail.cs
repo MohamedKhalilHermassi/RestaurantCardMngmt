@@ -1,4 +1,4 @@
-﻿using Business;
+﻿using RM.Notifications.Business;
 
 namespace EmailClient
 {

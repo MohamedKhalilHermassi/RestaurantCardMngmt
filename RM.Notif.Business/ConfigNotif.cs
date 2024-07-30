@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Abstraction;
-using Business;
-using Data;
+using RM.Notifications.Abstraction;
+using RM.Notifications.Business;
+using RM.Notifications.Data;
 
 public static class ConfigTransactions
 {

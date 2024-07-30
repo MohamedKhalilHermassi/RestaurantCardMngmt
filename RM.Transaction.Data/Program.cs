@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Data;
-using Model;
+using RM.Transaction.Data;
+using RM.Transaction.Model;
 
 class Program
 {

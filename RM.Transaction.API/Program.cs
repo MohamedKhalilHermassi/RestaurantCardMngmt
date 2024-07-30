@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Abstraction;
-using Data;
-using Remote;
-using Service;
-using Business;
+using RM.Transaction.Data;
+using System.Reflection;
+using RM.CarteResto.Business;
+using RM.CarteResto.Data;
+using RM.CarteResto.Abstraction;
+using RM.CarteResto.Remote;
+using RM.CarteResto.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -89,6 +91,10 @@ builder.Services.AddAuthentication(options => {
 
 builder.Services.AddSwaggerGen(option =>
 {
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    option.IncludeXmlComments(xmlPath);
+
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Test API", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

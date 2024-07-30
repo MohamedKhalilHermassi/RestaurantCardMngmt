@@ -1,11 +1,13 @@
 ﻿using EmailClient;
 using Microsoft.AspNetCore.Mvc;
 using NotificationsClient;
-using Business;
-using Model;
+using RM.DemandeCarteResto.Business;    
+using RM.DemandeCarteResto.Model;
 using Microsoft.AspNetCore.Authorization;
+using RM.Notifications.Business;
+using RM.Notifications.Model;
 
-namespace API
+namespace RM.DemandeCarteResto.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -43,6 +45,12 @@ namespace API
 
         }
 
+        /// <summary>
+        /// Créer une nouvelle demande de carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de créer une nouvelle demande de carte restaurant pour un utilisateur spécifié.
+        /// </remarks>
         [HttpPost]
         public async Task<ActionResult<DemandeCarteRestaurant>> AddDemandeCarteResto(DemandeCarteRestaurant demandeCard)
         {
@@ -70,14 +78,24 @@ namespace API
 
             }
         }
-                
+        /// <summary>
+        /// Supprimer une demande de carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de supprimer une demande de carte restaurant en spécifiant son identifiant.
+        /// </remarks>       
         [HttpDelete("{partitionkey}")]
         public async Task<IActionResult> DeleteDemandeCard(string partitionkey)
         {
             await _removeDemandCardCommand.ExecuteAsync(partitionkey);
             return NoContent();
         }
-
+        /// <summary>
+        /// Modifier une demande de carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de modifier une demande de carte restaurant en spécifiant son identifiant.
+        /// </remarks>   
         [HttpPut("{partitionkey}")]
         public async Task<IActionResult> UpdateDemandeCard(string partitionkey, DemandeCarteRestaurant demandeCard)
         {
@@ -85,6 +103,12 @@ namespace API
             return NoContent();
 
         }
+        /// <summary>
+        /// Accepter une demande de carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet d'accepter une demande de carte restaurant et cette action entraine la création d'une nouvelle carte restaurant via gRPC.
+        /// </remarks>   
         [HttpPut("approve/{partitionkey}")]
         [Authorize(Roles ="Admin")]
         public async Task<IActionResult> ApproveDemandeCard(string partitionkey)
@@ -97,6 +121,12 @@ namespace API
             return NoContent();
 
         }
+        /// <summary>
+        /// Rejeter une demande de carte restaurant
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de rejeter une demande de carte restaurant spécifique.
+        /// </remarks>   
         [HttpPut("reject/{partitionkey}")]
         [Authorize(Roles = "Admin")]
 

@@ -1,6 +1,6 @@
-﻿using Model;
+﻿using RM.DemandeCarteResto.Model;
 
-namespace Abstraction
+namespace RM.DemandeCarteResto.Abstraction
 {
     public interface IDemandeCarteRestoRepository
     {

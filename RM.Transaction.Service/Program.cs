@@ -1,8 +1,8 @@
-using Abstraction;
-using Data;
+using RM.Transaction.Abstraction;
+using RM.Transaction.Data;
 using Microsoft.EntityFrameworkCore;
 using ProtoBuf.Grpc.Server;
-using Service;
+using RM.Transaction.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 

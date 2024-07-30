@@ -1,9 +1,9 @@
-﻿using Data;
+﻿using RM.DemandeCarteResto.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Model;
+using RM.DemandeCarteResto.Model;
 
 class Program
 {

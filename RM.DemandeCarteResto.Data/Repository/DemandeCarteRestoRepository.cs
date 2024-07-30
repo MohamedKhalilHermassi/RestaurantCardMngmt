@@ -1,8 +1,8 @@
-﻿using Abstraction;
+﻿using RM.DemandeCarteResto.Abstraction;
 using Microsoft.EntityFrameworkCore;
-using Model;
+using RM.DemandeCarteResto.Model;
 
-namespace Data
+namespace RM.DemandeCarteResto.Data
 {
     public class DemandeCarteRestoRepository : IDemandeCarteRestoRepository
     {

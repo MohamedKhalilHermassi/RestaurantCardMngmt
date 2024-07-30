@@ -1,7 +1,7 @@
-﻿using Abstraction;
-using Model;
+﻿using RM.Notifications.Abstraction;
+using RM.Notifications.Model;
 
-namespace Business
+namespace RM.Notifications.Business
 {
     public class AddNotificationCommand
     {

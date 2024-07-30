@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Business;
-using Model;
+using RM.Notifications.Business;
+using RM.Notifications.Model;
 
 namespace API
 {
@@ -17,17 +17,27 @@ namespace API
             _readNotificationCommand = readNotificationCommand;
             _getAllNotificationByReceiverId = getAllNotificationByReceiverId;
         }
-
+        /// <summary>
+        /// Retourner la liste de notifications
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de retourner la liste de notifications destinée aux administrateurs.
+        /// </remarks>   
         [HttpGet("{admin}")]
         [Authorize(Roles ="Admin")]
-        public async Task<IEnumerable<Notification>> getNotificationForAdmin(string admin)
+        public async Task<IEnumerable<Notification>> GetNotificationForAdmin(string admin)
         {
             return await _getAllNotificationByReceiverId.ExecuteAsync(admin);
         }
 
-      
+        /// <summary>
+        /// Modifier une notification
+        /// </summary>
+        /// <remarks>
+        /// Cette méthode permet de rendre le statut "lu" d'une notification "vrai". 
+        /// </remarks>  
         [HttpPut("readNotif/{partitionkey}")]
-        public async Task readNotification(string partitionkey)
+        public async Task ReadNotification(string partitionkey)
         {
                 await _readNotificationCommand.ExecuteAsync(partitionkey);
         }

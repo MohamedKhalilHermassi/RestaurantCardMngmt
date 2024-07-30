@@ -1,8 +1,8 @@
-﻿using Abstraction;
+﻿using RM.Transaction.Abstraction;
 using Microsoft.EntityFrameworkCore;
-using Model;
+using RM.Transaction.Model;
 
-namespace Data
+namespace RM.Transaction.Data
 {
     public class TransactionRepository : ITransactionRepository
     {

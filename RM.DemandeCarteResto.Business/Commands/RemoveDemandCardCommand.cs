@@ -1,6 +1,6 @@
-﻿using Abstraction;
+﻿using RM.DemandeCarteResto.Abstraction;
 
-namespace Business
+namespace RM.DemandeCarteResto.Business
 {
     public class RemoveDemandCardCommand
     {

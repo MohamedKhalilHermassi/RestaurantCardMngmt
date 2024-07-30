@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Data;
-using Model;
+using RM.CarteResto.Data;
+using RM.CarteResto.Model;
 
 class Program
 {
