@@ -52,9 +52,8 @@ namespace RM.Notifications.Data
 
                 }
             
-           
         }
-        public async Task DemandSuccesfullyAddedEmail(string ReceiverEmail, string NotifId)
+        public async Task DemandSuccesfullyAddedEmail(string ReceiverEmail)
         {
 
             string fromMail = "khalilherma7@gmail.com";
@@ -76,7 +75,42 @@ namespace RM.Notifications.Data
 
             try
             {
-                smtpClient.Send(message);
+               smtpClient.Send(message);
+            }
+            catch (Exception ex)
+            {
+                /* emailNotif.StatutError = ex.Message;
+                 _context.SaveChanges();*/
+
+
+            }
+
+
+        }
+
+        public async Task ApprovedDemandEmail(string ReceiverEmail)
+        {
+
+            string fromMail = "khalilherma7@gmail.com";
+            string fromPassword = "zbbwjqqhtknmfvnp";
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromMail);
+            message.Subject = "Votre demande de carte restaurant a été acceptée.";
+            message.To.Add(new MailAddress(ReceiverEmail));
+            message.Body = $"<html><body>Bonjour {ReceiverEmail}, votre demande de carte restaurant a été acceptée. Veuillez visiter votre espace employé afin de consulter les détails de votre carte.</body></html>";
+            message.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPassword),
+                EnableSsl = true,
+            };
+
+            try
+            {
+               await smtpClient.SendMailAsync(message);
             }
             catch (Exception ex)
             {
