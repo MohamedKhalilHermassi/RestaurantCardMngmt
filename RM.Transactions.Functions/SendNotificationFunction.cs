@@ -1,7 +1,7 @@
-using Business;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using RM.Notifications.Business;
 using System.Text.Json;
 
 namespace RM.Transactions.Functions

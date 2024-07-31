@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RM.Notif.Business;
 using RM.Notifications.Abstraction;
 using RM.Notifications.Business;
 using RM.Notifications.Data;
@@ -15,6 +16,7 @@ public static class ConfigTransactions
         services.AddScoped<AddNotificationCommand>();
         services.AddScoped<ReadNotificationCommand>();
         services.AddScoped<SendEmailCommand>();
+        services.AddScoped<SendSuccessDemandEmailCommand>();
         
         // QUERIES
         services.AddScoped<GetAllNotificationsByReceiverIdQuery>();

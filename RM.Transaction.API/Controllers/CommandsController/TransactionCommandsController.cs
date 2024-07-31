@@ -55,7 +55,7 @@ namespace RM.Transaction.API
         /// Cette méthode permet de créer des transactions qui décrémente le solde d'une carte restaurant afin de simuler les transactions à effectuer par la carte restaurant..
         /// </remarks>  
         [HttpPost("addTransactionSimulation")]
-        [Authorize(Roles = "User")]
+       // [Authorize(Roles = "User")]
         public async Task<ActionResult<Transactions>> AddTransactionSimulator(Transactions transaction)
         {
             var check = await _carteRestoService.VerifyCarteRestoSolde(transaction.CarteRestoId, transaction.Montant);

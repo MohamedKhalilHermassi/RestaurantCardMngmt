@@ -6,6 +6,7 @@ using RM.DemandeCarteResto.Model;
 using Microsoft.AspNetCore.Authorization;
 using RM.Notifications.Business;
 using RM.Notifications.Model;
+using RM.Notif.Business;
 
 namespace RM.DemandeCarteResto.API
 {
@@ -19,6 +20,8 @@ namespace RM.DemandeCarteResto.API
         private readonly RemoveDemandCardCommand _removeDemandCardCommand;
         private readonly UpdateCardRestoCommand _updateCardRestoCommand;
         private readonly AddNotificationCommand _addNotificationCommand;
+        private readonly SendSuccessDemandEmailCommand _sendSuccessDemandEmailCommand;
+        private readonly ApprovedDemandEmail _approvedDemandEmail;
         private readonly ClientEmail _clientEmail;
         private readonly ClientSignalR _clientSignalR;
         public DemandeCardCommandsController(
@@ -28,6 +31,8 @@ namespace RM.DemandeCarteResto.API
             RejectDemandCardCommand rejectDemandCardCommand,
             RemoveDemandCardCommand removeDemandCardCommand,
             UpdateCardRestoCommand updateCardRestoCommand,
+            SendSuccessDemandEmailCommand sendSuccessDemandEmailCommand,
+            ApprovedDemandEmail approvedDemandEmail,
             ClientEmail clientEmail,
             ClientSignalR clientSignalR
             )
@@ -38,9 +43,10 @@ namespace RM.DemandeCarteResto.API
             _removeDemandCardCommand = removeDemandCardCommand;
             _updateCardRestoCommand = updateCardRestoCommand;
             _addNotificationCommand = addNotificationCommand;
+            _sendSuccessDemandEmailCommand = sendSuccessDemandEmailCommand;
             _clientEmail = clientEmail;
             _clientSignalR = clientSignalR;
-
+            _approvedDemandEmail = approvedDemandEmail;
 
 
         }
@@ -74,6 +80,7 @@ namespace RM.DemandeCarteResto.API
 
                // await _clientEmail.SendEmail("khalilherma6@gmail.com", "1234");
                 await _clientSignalR.AdminAlert(newNotif);
+                await _sendSuccessDemandEmailCommand.ExecuteAsync(demandeCard.UserEmail);
                 return CreatedAtAction(nameof(AddDemandeCarteResto), new { id = demandeCard.Id }, demandeCard);
 
             }
@@ -113,11 +120,8 @@ namespace RM.DemandeCarteResto.API
         [Authorize(Roles ="Admin")]
         public async Task<IActionResult> ApproveDemandeCard(string partitionkey)
         {
-            await _acceptDemandCardCommand.ExecuteAsync(partitionkey);
+            await _acceptDemandCardCommand.ExecuteAsync(partitionkey);      
 
-           // await _hubConnection.StartAsync();
-           // await _hubConnection.InvokeAsync("NotifyUserAccept",foundDemand.UserEmail);
-           // await _emailService.SendSimpleMessageAsync();
             return NoContent();
 
         }
@@ -133,9 +137,6 @@ namespace RM.DemandeCarteResto.API
         public async Task<IActionResult> RejectDemandeCard(string partitionkey)
         {
             await _rejectDemandCardCommand.ExecuteAsync(partitionkey);
-         //   await _hubConnection.StartAsync();
-         //   await _hubConnection.InvokeAsync("NotifyUserReject",foundDemand.UserEmail);
-         //   await _emailService.SendSimpleMessageAsyncReject();
             return NoContent();
         }
     }
