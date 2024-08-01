@@ -8,6 +8,6 @@ namespace RM.Notifications.Abstraction
         Task SendEmailNotification(string ReceiverEmail,string NotifId);
         Task DemandSuccesfullyAddedEmail(string ReceiverEmail);
         Task ApprovedDemandEmail(string ReceiverEmail);
-
+        Task RejectedDemandEmail(string ReceiverEmail);
     }
 }

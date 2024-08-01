@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using RM.Notifications.Business;
 using RM.Notifications.Model;
 using RM.Notif.Business;
+using System.Text.Json.Nodes;
+using RM.Notif.Business.Commands;
 
 namespace RM.DemandeCarteResto.API
 {
@@ -22,6 +24,7 @@ namespace RM.DemandeCarteResto.API
         private readonly AddNotificationCommand _addNotificationCommand;
         private readonly SendSuccessDemandEmailCommand _sendSuccessDemandEmailCommand;
         private readonly ApprovedDemandEmail _approvedDemandEmail;
+        private readonly RejectedDemandEmail _rejectedEmailDemand;
         private readonly ClientEmail _clientEmail;
         private readonly ClientSignalR _clientSignalR;
         public DemandeCardCommandsController(
@@ -33,6 +36,7 @@ namespace RM.DemandeCarteResto.API
             UpdateCardRestoCommand updateCardRestoCommand,
             SendSuccessDemandEmailCommand sendSuccessDemandEmailCommand,
             ApprovedDemandEmail approvedDemandEmail,
+            RejectedDemandEmail rejectedDemandEmail,
             ClientEmail clientEmail,
             ClientSignalR clientSignalR
             )
@@ -47,7 +51,7 @@ namespace RM.DemandeCarteResto.API
             _clientEmail = clientEmail;
             _clientSignalR = clientSignalR;
             _approvedDemandEmail = approvedDemandEmail;
-
+            _rejectedEmailDemand = rejectedDemandEmail;
 
         }
 
@@ -116,12 +120,13 @@ namespace RM.DemandeCarteResto.API
         /// <remarks>
         /// Cette méthode permet d'accepter une demande de carte restaurant et cette action entraine la création d'une nouvelle carte restaurant via gRPC.
         /// </remarks>   
-        [HttpPut("approve/{partitionkey}")]
+        [HttpPut("approve/{partitionkey}/{email}")]
         [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> ApproveDemandeCard(string partitionkey)
+        public async Task<IActionResult> ApproveDemandeCard(string partitionkey,string email)
         {
-            await _acceptDemandCardCommand.ExecuteAsync(partitionkey);      
-
+            await _acceptDemandCardCommand.ExecuteAsync(partitionkey);
+            await _clientSignalR.EmployeePositiveAlert(email);
+            await _approvedDemandEmail.ExecuteAsync(email);
             return NoContent();
 
         }
@@ -131,12 +136,14 @@ namespace RM.DemandeCarteResto.API
         /// <remarks>
         /// Cette méthode permet de rejeter une demande de carte restaurant spécifique.
         /// </remarks>   
-        [HttpPut("reject/{partitionkey}")]
+        [HttpPut("reject/{partitionkey}/{email}")]
         [Authorize(Roles = "Admin")]
 
-        public async Task<IActionResult> RejectDemandeCard(string partitionkey)
+        public async Task<IActionResult> RejectDemandeCard(string partitionkey,string email)
         {
             await _rejectDemandCardCommand.ExecuteAsync(partitionkey);
+            await _rejectedEmailDemand.ExecuteAsync(email);
+            await _clientSignalR.EmployeeNegativeAlert(email);
             return NoContent();
         }
     }
