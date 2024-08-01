@@ -1,9 +1,9 @@
-using Abstraction;
-using Data;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RM.Notifications.Abstraction;
+using RM.Notifications.Data;
 
 var host = new HostBuilder()
 
@@ -19,7 +19,7 @@ var host = new HostBuilder()
         });
 
         // Register services
-        services.AddScoped<IEmailNotificationRepository, EmailNotificationRepository>();
+        services.AddScoped<IEmailNotificationRepository , EmailNotificationRepository>();
 
         // Add Application Insights
         services.AddApplicationInsightsTelemetryWorkerService();

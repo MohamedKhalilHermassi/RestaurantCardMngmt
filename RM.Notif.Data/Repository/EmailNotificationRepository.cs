@@ -122,5 +122,41 @@ namespace RM.Notifications.Data
 
 
         }
+
+
+        public async Task RejectedDemandEmail(string ReceiverEmail)
+        {
+
+            string fromMail = "khalilherma7@gmail.com";
+            string fromPassword = "zbbwjqqhtknmfvnp";
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromMail);
+            message.Subject = "Votre demande de carte restaurant a été rejetée.";
+            message.To.Add(new MailAddress(ReceiverEmail));
+            message.Body = $"<html><body>Bonjour {ReceiverEmail}, votre demande de carte restaurant a été rejetée. Cependant, vous pouvez déposer une nouvelle demande via votre espace employé. Merci pour votre compréhension.</body></html>";
+            message.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPassword),
+                EnableSsl = true,
+            };
+
+            try
+            {
+                await smtpClient.SendMailAsync(message);
+            }
+            catch (Exception ex)
+            {
+                /* emailNotif.StatutError = ex.Message;
+                 _context.SaveChanges();*/
+
+
+            }
+
+
+        }
     }
 }
