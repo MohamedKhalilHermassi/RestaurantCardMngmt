@@ -90,7 +90,7 @@ namespace RM.CarteResto.API
         /// Décharger une carte restaurant
         /// </summary>
         /// <remarks>
-        /// Cette méthode permet de décharger une carte restaurant. Elle prend 3 paramètres : l'identifiant de la carté à recharger ,le montant et le description de la transaction. Cette méthode implique aussi la création d'une transaction relative à cette carte restaruant spécifique ayant les mêmes valeurs {montant, desctiption}.
+        /// Cette méthode permet de décharger une carte restaurant. Elle prend 3 paramètres : l'identifiant de la carte à recharger ,le montant et le description de la transaction. Cette méthode implique aussi la création d'une transaction relative à cette carte restaruant spécifique ayant les mêmes valeurs {montant, desctiption}.
         /// </remarks>
         [HttpPut("dischargeCard/{partitionkey}/{montant}/{description}")]
         [Authorize(Roles = "User")]
