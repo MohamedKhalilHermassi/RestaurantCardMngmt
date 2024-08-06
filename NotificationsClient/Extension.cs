@@ -8,10 +8,7 @@ namespace NotifCLient
     {
         public static IServiceCollection AddNotifClientServices(this IServiceCollection services)
         {
-
-           
             services.AddScoped<ClientSignalR>();
-
 
             return services;
         }

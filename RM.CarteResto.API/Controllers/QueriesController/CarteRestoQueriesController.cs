@@ -37,19 +37,7 @@ namespace RM.CarteResto.API
             var cards = await _getAllCardsQuery.ExecuteAsync();
             return Ok(cards);
         }
-        /* 
-                [HttpGet("GetTransactionsFromCardsService/{id}")]
-                 public async Task<ActionResult<TransactionByIdReply>> GetAllTransactionsInCardsService(string id)
-                  {
-                      var client = _grpcConfigTransaction.CreateGrpcClient<ITransactionServiceContract>();
-
-
-                      Guid myGuid = new Guid(id);
-                      var reply = await client.getTransactionById(
-                          new TransactionByIdRequest { Id = myGuid });
-                      return Ok(reply);
-
-                  }*/
+    
 
         /// <summary>
         /// Retourner une carte restaurant spécifique
