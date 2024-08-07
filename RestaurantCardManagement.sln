@@ -81,6 +81,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationsClient", "Noti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient", "EmailClient\EmailClient.csproj", "{7A6903EC-472E-4F2A-A0D7-F3E40D2578AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RM.CarteResto.UnitTests", "RM.CarteResto.UnitTests\RM.CarteResto.UnitTests.csproj", "{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -215,6 +217,10 @@ Global
 		{7A6903EC-472E-4F2A-A0D7-F3E40D2578AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A6903EC-472E-4F2A-A0D7-F3E40D2578AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A6903EC-472E-4F2A-A0D7-F3E40D2578AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -251,6 +257,7 @@ Global
 		{B24244CC-B1EC-4107-AC41-9902BCC4316D} = {12A61BE0-BCD1-481D-B01B-F896FFB44FE9}
 		{A9AC305C-3CD0-45C9-8960-BE37B88B3427} = {69ED018E-2A1F-42DA-861F-63815A1C9FA0}
 		{7A6903EC-472E-4F2A-A0D7-F3E40D2578AF} = {69ED018E-2A1F-42DA-861F-63815A1C9FA0}
+		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A} = {E2FF7802-7487-4E37-BD21-D487D5F34057}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0851E63E-C278-4212-9A5C-7EC39CEB10F6}
