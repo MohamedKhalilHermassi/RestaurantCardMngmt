@@ -1,4 +1,6 @@
-﻿using RM.CarteResto.Abstraction;
+﻿using NotificationsClient;
+using RM.CarteResto.Abstraction;
+using RM.Notif.Business.Commands;
 using RM.Transaction.Remote;
 using RM.Transaction.Service;
 
@@ -6,13 +8,17 @@ namespace RM.CarteResto.Business
 {
     public class ChargeCardCommand
     {
-        private readonly ICarteRestoRepository _carteRestoRepository;
-        private readonly TransactionServiceGRPC _transactionService;
+        private readonly  ICarteRestoRepository _carteRestoRepository;
+        private readonly  TransactionServiceGRPC _transactionService;
+        private readonly  RechargeCardEmail _rechargeCardEmail;
+        private readonly  ClientSignalR _clientSignalR;
 
-        public ChargeCardCommand(ICarteRestoRepository carteRestoRepository, TransactionServiceGRPC transactionService)
+        public ChargeCardCommand(ICarteRestoRepository carteRestoRepository, TransactionServiceGRPC transactionService, RechargeCardEmail rechargeCardEmail, ClientSignalR clientSignalR)
         {
             _carteRestoRepository = carteRestoRepository;
             _transactionService = transactionService;
+            _rechargeCardEmail = rechargeCardEmail;
+            _clientSignalR = clientSignalR;
         }
 
         public async Task ExecuteAsync(string partitionkey, float montant)
@@ -30,10 +36,15 @@ namespace RM.CarteResto.Business
             var IdTran = await _transactionService.getTransactionByCardId(partitionkey);
            
             var card = await _carteRestoRepository.GetCard(partitionkey);
+
             if (card == null)
             {
                 throw new InvalidOperationException($"No card found for ID {partitionkey}");
             }
+            // EMAIL 
+            await _rechargeCardEmail.ExecuteAsync(card.UserEmail);
+            // SIGNAL R NOTIF
+            await _clientSignalR.AlertEmployeeChargedCard(card.UserEmail);
 
             var newTransactionIds = new string[card.TransactionIds.Length + 1];
 

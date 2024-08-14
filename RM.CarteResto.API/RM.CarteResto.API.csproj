@@ -25,8 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmailClient\EmailClient.csproj" />
+    <ProjectReference Include="..\NotificationsClient\NotificationsClient.csproj" />
     <ProjectReference Include="..\RM.CarteResto.Business\RM.CarteResto.Business.csproj" />
     <ProjectReference Include="..\RM.CarteResto.Data\RM.CarteResto.Data.csproj" />
+    <ProjectReference Include="..\RM.Notif.Business\RM.Notif.Business.csproj" />
     <ProjectReference Include="..\RM.Transaction.Abstraction\RM.Transaction.Abstraction.csproj" />
     <ProjectReference Include="..\RM.Transaction.Data\RM.Transaction.Data.csproj" />
     <ProjectReference Include="..\RM.Transaction.Remote\RM.Transaction.Remote.csproj" />

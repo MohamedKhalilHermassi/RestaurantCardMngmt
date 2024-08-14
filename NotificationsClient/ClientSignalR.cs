@@ -39,6 +39,12 @@ namespace NotificationsClient
             await _hubConnection.InvokeAsync("NotifyUserReject",employeeEmail);
         }
 
+        public async Task AlertEmployeeChargedCard(string employeeEmail)
+        {
+            await _hubConnection.StartAsync();
+            await _hubConnection.InvokeAsync("ChargedCardNotif", employeeEmail);
+        }
+
 
     }
 }

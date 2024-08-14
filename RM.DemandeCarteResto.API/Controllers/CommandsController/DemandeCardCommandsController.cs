@@ -82,7 +82,6 @@ namespace RM.DemandeCarteResto.API
                 // await _hubConnection.StartAsync(); 
                 // await _hubConnection.InvokeAsync("ReceiveMessage");
 
-               // await _clientEmail.SendEmail("khalilherma6@gmail.com", "1234");
                 await _clientSignalR.AdminAlert(newNotif);
                 await _sendSuccessDemandEmailCommand.ExecuteAsync(demandeCard.UserEmail);
                 return CreatedAtAction(nameof(AddDemandeCarteResto), new { id = demandeCard.Id }, demandeCard);

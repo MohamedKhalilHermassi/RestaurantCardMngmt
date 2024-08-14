@@ -70,4 +70,17 @@ public class NotificationHub : Hub
             Console.WriteLine($"No connection found for ${userEmail}");
         }
     }
+
+    public async Task ChargedCardNotif(string employeeEmail)
+    {
+                if (_connections.TryGetValue(employeeEmail, out string connectionId))
+                {
+                    await Clients.Client(connectionId).SendAsync("ChargedCardNotif", "Votre carte restaurant a été rechargée");
+                }
+                else
+        {
+            Console.WriteLine($"No connection found for ${employeeEmail}");
+        }
+    }
+
 }

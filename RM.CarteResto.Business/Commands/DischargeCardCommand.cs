@@ -17,36 +17,45 @@ namespace RM.CarteResto.Business
         public async Task ExecuteAsync(string partitionkey, float montant, string description)
         {
 
-            var trasnaction = new TransactionByIdReply
-            {
-                CarteRestoId = partitionkey,
-                Description = description,
-                Montant = montant,
-                Type = false
-            };
-            await _transactionService.addTransaction(trasnaction);
-            var IdTran = await _transactionService.getTransactionByCardId(partitionkey);
+         
 
             var card = await _carteRestoRepostiory.GetCard(partitionkey);
             if (card == null)
             {
                 throw new InvalidOperationException($"No card found for ID {partitionkey}");
             }
-
-            var newTransactionIds = new string[card.TransactionIds.Length + 1];
-
-            for (int i = 0; i < card.TransactionIds.Length; i++)
+            if (card.Solde < montant)
             {
-                newTransactionIds[i] = card.TransactionIds[i];
+                throw new InvalidOperationException($"Card balance is insufficient {card.Solde} < {montant} ");
+
             }
+            else
+            {
+                var trasnaction = new TransactionByIdReply
+                {
+                    CarteRestoId = partitionkey,
+                    Description = description,
+                    Montant = montant,
+                    Type = false
+                };
+                await _transactionService.addTransaction(trasnaction);
+                var IdTran = await _transactionService.getTransactionByCardId(partitionkey);
 
-            newTransactionIds[card.TransactionIds.Length] = IdTran.PartitionKey;
+                var newTransactionIds = new string[card.TransactionIds.Length + 1];
 
-            card.TransactionIds = newTransactionIds;
+                for (int i = 0; i < card.TransactionIds.Length; i++)
+                {
+                    newTransactionIds[i] = card.TransactionIds[i];
+                }
 
-            card.Solde -= montant;
+                newTransactionIds[card.TransactionIds.Length] = IdTran.PartitionKey;
 
-            await _carteRestoRepostiory.UpdateCard(partitionkey, card);
+                card.TransactionIds = newTransactionIds;
+
+                card.Solde -= montant;
+
+                await _carteRestoRepostiory.UpdateCard(partitionkey, card);
+            }
         }
     }
 }

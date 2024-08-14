@@ -1,53 +1,35 @@
-﻿using Moq;
-using RM.CarteResto.Abstraction;
-using RM.CarteResto.Business;
-using RM.CarteResto.Model;
+﻿using RM.CarteResto.UnitTests;
+using RM.CarteResto.UnitTests.CommandsUnitTests;
 using Xunit;
 
 namespace RM.CarteResto.Tests
 {
     public class CommandsTests
     {
-        [Fact]
-        public async Task ExecuteAsync_ShouldCallAddCardOnRepository()
+        public class RemoveCardCommandTests
         {
-            var guid = Guid.NewGuid();
-            // Arrange
-            var mockRepository = new Mock<ICarteRestoRepository>();
-            var addCardCommand = new AddCardCommand(mockRepository.Object);
-            var testCard = new CarteRestaurant
+            private readonly CommandTestFixture _fixture;
+
+            public RemoveCardCommandTests()
             {
-                Id = guid,
-                Numero ="12345678",
-                PartitionKey = guid.ToString(),
-                Solde=150,
-                UserEmail="test@test.com",
-                UserId=Guid.NewGuid().ToString(),
-                TransactionIds = [Guid.NewGuid().ToString(),Guid.NewGuid().ToString()]
-               
-            };
+                _fixture = new CommandTestFixture();
+            }
 
-            // Act
-            await addCardCommand.ExecuteAsync(testCard);
+            [Fact]
+            public async Task ExecuteAsync_ShouldCallRemoveCardOnRepository()
+            {
+                // Arrange
+                var partitionKey = "12345678";
 
-            // Assert
-            mockRepository.Verify(r => r.AddCard(It.Is<CarteRestaurant>(c => c.Id == testCard.Id && c.Solde == testCard.Solde && c.UserEmail == testCard.UserEmail)), Times.Once);
+                // Act
+                await CommandExecutor.ExecuteAsync(_fixture.RemoveCardCommand, partitionKey);
+
+                // Assert
+                var assertions = new CommandAssertions(_fixture.MockRepository);
+                assertions.VerifyRemoveCardCalledOnce(partitionKey);
+            }
         }
 
-        [Fact]
-        public async Task ExecuteAsync_ShouldCallRemoveCardOnRepository()
-        {
-            // Arrange
-            var mockRepository = new Mock<ICarteRestoRepository>();
-            var removeCardCommand = new RemoveCardCommand(mockRepository.Object);
-            var partitionKey = "12345678";
-
-            // Act
-            await removeCardCommand.ExecuteAsync(partitionKey);
-
-            // Assert
-            mockRepository.Verify(r => r.RemoveCard(partitionKey), Times.Once);
-        }
 
     }
 }

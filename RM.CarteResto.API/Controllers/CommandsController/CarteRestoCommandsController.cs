@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using NotificationsClient;
 using RM.CarteResto.Business;
 using RM.CarteResto.Model;
+using RM.Notif.Business.Commands;
 using RM.Transaction.Remote;
 
 namespace RM.CarteResto.API
@@ -15,17 +18,18 @@ namespace RM.CarteResto.API
         private readonly DischargeCardCommand _dischargeCardCommand;
         private readonly RemoveCardCommand _removeCardCommand;
         private readonly UpdateCardCommand _updateCardCommand;
-
+        private readonly RechargeCardEmail _rechargedCardEmail;
         private readonly ITransactionServiceContract _transactionService;
-
         public CarteRestoCommandsController(
             AddCardCommand addCardCommand,
             ChargeCardCommand chargeCardCommand,
             DischargeCardCommand dischargeCardCommand, 
             RemoveCardCommand removeCardCommand, 
             UpdateCardCommand updateCardCommand, 
+            RechargeCardEmail rechargedCardEmail,
             ITransactionServiceContract transactionService)
         {
+            _rechargedCardEmail = rechargedCardEmail;
             _addCardCommand = addCardCommand;
             _chargeCardCommand = chargeCardCommand;
             _dischargeCardCommand = dischargeCardCommand;
@@ -81,8 +85,7 @@ namespace RM.CarteResto.API
         public async Task<IActionResult> ChargeCard(string partitionkey, float montant)
         {
             
-            await _chargeCardCommand.ExecuteAsync(partitionkey, montant);    
-
+            await _chargeCardCommand.ExecuteAsync(partitionkey, montant);
             return NoContent();
 
         }
@@ -99,7 +102,7 @@ namespace RM.CarteResto.API
           
             await _dischargeCardCommand.ExecuteAsync(partitionkey,montant,description);
 
-            return NoContent();
+            return NoContent(); 
 
         }
     }
