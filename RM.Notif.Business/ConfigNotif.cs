@@ -20,6 +20,8 @@ public static class ConfigTransactions
         services.AddScoped<SendSuccessDemandEmailCommand>();
         services.AddScoped<ApprovedDemandEmail>();
         services.AddScoped<RejectedDemandEmail>();
+        services.AddScoped<RechargeCardEmail>();
+
 
         // QUERIES
         services.AddScoped<GetAllNotificationsByReceiverIdQuery>();

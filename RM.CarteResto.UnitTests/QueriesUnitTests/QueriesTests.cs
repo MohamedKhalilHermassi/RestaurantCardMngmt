@@ -27,7 +27,7 @@ namespace RM.CarteResto.UnitTests.QueriesUnitTests
             var getCardQuery = new GetCardQuery(mockRepository.Object);
 
             // Act
-            var result = await getCardQuery.ExecuteAsync(partitionKey.ToString()    );
+            var result = await getCardQuery.ExecuteAsync(partitionKey.ToString());
 
             // Assert
             Assert.Equal(expectedCard, result);

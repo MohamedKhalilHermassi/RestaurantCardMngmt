@@ -8,6 +8,9 @@ using RM.CarteResto.Data;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Reflection;
+using RM.Notifications.Data;
+using EmailClient;
+using NotifCLient;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +26,7 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod();
         });
 });
+builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -34,6 +38,12 @@ var cosmosDbSettings = builder.Configuration.GetSection("CosmosDb");
 var accountEndpoint = cosmosDbSettings["AccountEndpoint"];
 var accountKey = cosmosDbSettings["AccountKey"];
 var databaseName = cosmosDbSettings["DatabaseName"];
+builder.Services.AddDbContext<NotificationContext>(options =>
+{
+    options.UseCosmos(accountEndpoint, accountKey, databaseName);
+});
+builder.Services.AddNotificationsServices();
+builder.Services.AddNotifClientServices();
 builder.Services.AddDbContext<CarteRestoContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
@@ -46,6 +56,16 @@ builder.Services.AddDbContext<TransactionContext>(options =>
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddDbContext<EmailNotificationContext>(options =>
+{
+    options.UseCosmos(accountEndpoint, accountKey, databaseName);
+});
+builder.Services.AddDbContext<NotificationContext>(options =>
+{
+    options.UseCosmos(accountEndpoint, accountKey, databaseName);
+});
+builder.Services.AddEmailServices();
+builder.Services.AddNotificationsServices();
 
 //Transaction GRPC 
 //builder.Services.AddTransactionGrpcClient();

@@ -9,5 +9,7 @@ namespace RM.Notifications.Abstraction
         Task DemandSuccesfullyAddedEmail(string ReceiverEmail);
         Task ApprovedDemandEmail(string ReceiverEmail);
         Task RejectedDemandEmail(string ReceiverEmail);
+        Task RechargedCardEmail(string ReceiverEmail);
+
     }
 }
