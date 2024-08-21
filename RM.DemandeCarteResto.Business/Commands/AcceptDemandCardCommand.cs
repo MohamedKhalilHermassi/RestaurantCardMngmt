@@ -5,15 +5,19 @@ namespace RM.DemandeCarteResto.Business
 {
     public class AcceptDemandCardCommand
     {
+        #region Fields
         private readonly IDemandeCarteRestoRepository _demandeCardRepository;
         private readonly ICarteRestoService _carteRestoService;
+        #endregion
 
+        #region Constructeur
         public AcceptDemandCardCommand(IDemandeCarteRestoRepository demandeCardRepository, ICarteRestoService carteRestoService
 )
         {
             _carteRestoService = carteRestoService;
             _demandeCardRepository = demandeCardRepository;
-        }
+        } 
+        #endregion
         public async Task ExecuteAsync(string partitionkey)
         {
             var demand = await _demandeCardRepository.GetDemandeCardById(partitionkey);

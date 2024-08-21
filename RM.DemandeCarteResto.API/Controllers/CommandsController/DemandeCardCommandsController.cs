@@ -1,14 +1,13 @@
 ﻿using EmailClient;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotificationsClient;
-using RM.DemandeCarteResto.Business;    
+using RM.DemandeCarteResto.Business;
 using RM.DemandeCarteResto.Model;
-using Microsoft.AspNetCore.Authorization;
+using RM.Notif.Business;
+using RM.Notif.Business.Commands;
 using RM.Notifications.Business;
 using RM.Notifications.Model;
-using RM.Notif.Business;
-using System.Text.Json.Nodes;
-using RM.Notif.Business.Commands;
 
 namespace RM.DemandeCarteResto.API
 {
@@ -16,6 +15,7 @@ namespace RM.DemandeCarteResto.API
     [ApiController]
     public class DemandeCardCommandsController : ControllerBase
     {
+        #region Fields
         private readonly AcceptDemandCardCommand _acceptDemandCardCommand;
         private readonly AddDemandCardCommand _addDemandCardCommand;
         private readonly RejectDemandCardCommand _rejectDemandCardCommand;
@@ -27,19 +27,23 @@ namespace RM.DemandeCarteResto.API
         private readonly RejectedDemandEmail _rejectedEmailDemand;
         private readonly ClientEmail _clientEmail;
         private readonly ClientSignalR _clientSignalR;
+        #endregion
+
+
+        #region Constructeur
         public DemandeCardCommandsController(
-            AcceptDemandCardCommand acceptDemandCardCommand,
-            AddNotificationCommand addNotificationCommand,
-            AddDemandCardCommand addDemandCardCommand,
-            RejectDemandCardCommand rejectDemandCardCommand,
-            RemoveDemandCardCommand removeDemandCardCommand,
-            UpdateCardRestoCommand updateCardRestoCommand,
-            SendSuccessDemandEmailCommand sendSuccessDemandEmailCommand,
-            ApprovedDemandEmail approvedDemandEmail,
-            RejectedDemandEmail rejectedDemandEmail,
-            ClientEmail clientEmail,
-            ClientSignalR clientSignalR
-            )
+           AcceptDemandCardCommand acceptDemandCardCommand,
+           AddNotificationCommand addNotificationCommand,
+           AddDemandCardCommand addDemandCardCommand,
+           RejectDemandCardCommand rejectDemandCardCommand,
+           RemoveDemandCardCommand removeDemandCardCommand,
+           UpdateCardRestoCommand updateCardRestoCommand,
+           SendSuccessDemandEmailCommand sendSuccessDemandEmailCommand,
+           ApprovedDemandEmail approvedDemandEmail,
+           RejectedDemandEmail rejectedDemandEmail,
+           ClientEmail clientEmail,
+           ClientSignalR clientSignalR
+           )
         {
             _addDemandCardCommand = addDemandCardCommand;
             _acceptDemandCardCommand = acceptDemandCardCommand;
@@ -53,7 +57,8 @@ namespace RM.DemandeCarteResto.API
             _approvedDemandEmail = approvedDemandEmail;
             _rejectedEmailDemand = rejectedDemandEmail;
 
-        }
+        } 
+        #endregion
 
         /// <summary>
         /// Créer une nouvelle demande de carte restaurant
@@ -88,6 +93,7 @@ namespace RM.DemandeCarteResto.API
 
             }
         }
+
         /// <summary>
         /// Supprimer une demande de carte restaurant
         /// </summary>
@@ -100,6 +106,7 @@ namespace RM.DemandeCarteResto.API
             await _removeDemandCardCommand.ExecuteAsync(partitionkey);
             return NoContent();
         }
+
         /// <summary>
         /// Modifier une demande de carte restaurant
         /// </summary>
@@ -113,6 +120,7 @@ namespace RM.DemandeCarteResto.API
             return NoContent();
 
         }
+
         /// <summary>
         /// Accepter une demande de carte restaurant
         /// </summary>
@@ -137,7 +145,6 @@ namespace RM.DemandeCarteResto.API
         /// </remarks>   
         [HttpPut("reject/{partitionkey}/{email}")]
         [Authorize(Roles = "Admin")]
-
         public async Task<IActionResult> RejectDemandeCard(string partitionkey,string email)
         {
             await _rejectDemandCardCommand.ExecuteAsync(partitionkey);

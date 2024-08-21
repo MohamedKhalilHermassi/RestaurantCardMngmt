@@ -1,16 +1,16 @@
-using System.Text;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RM.Transaction.Data;
-using System.Reflection;
+using RM.CarteResto.Abstraction;
 using RM.CarteResto.Business;
 using RM.CarteResto.Data;
-using RM.CarteResto.Abstraction;
 using RM.CarteResto.Remote;
 using RM.CarteResto.Service;
+using RM.Transaction.Data;
+using System.Reflection;
+using System.Text;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);

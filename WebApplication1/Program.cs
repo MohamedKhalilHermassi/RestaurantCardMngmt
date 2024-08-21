@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RM.Notifications.Data;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

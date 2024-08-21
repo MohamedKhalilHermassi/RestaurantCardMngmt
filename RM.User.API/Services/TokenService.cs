@@ -1,23 +1,27 @@
 ﻿
 namespace JwtRoleAuthentication.Services;
 
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using RM.User.Model.Entities;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using RM.User.Model.Entities;
 
 public class TokenService
 {
+    #region Fields
     // Specify how long until the token expires
     private const int ExpirationMinutes = 30;
     private readonly ILogger<TokenService> _logger;
+    #endregion
 
+    #region Constructeur
     public TokenService(ILogger<TokenService> logger)
     {
         _logger = logger;
     }
 
+    #endregion
     public string CreateToken(Utilisateur user)
     {
         var expiration = DateTime.UtcNow.AddMinutes(ExpirationMinutes);

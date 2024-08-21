@@ -1,11 +1,11 @@
-﻿using RM.CarteResto.Abstraction;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RM.CarteResto.Abstraction;
 using RM.CarteResto.Business;
 using RM.CarteResto.Data;
-using Microsoft.Extensions.DependencyInjection;
-using RM.Transaction.Remote;
-using RM.Transaction.Service;
 using RM.Transaction.Abstraction;
 using RM.Transaction.Data;
+using RM.Transaction.Remote;
+using RM.Transaction.Service;
 
 public static class ConfigCarteResto
 {

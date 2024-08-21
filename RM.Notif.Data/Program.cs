@@ -1,8 +1,8 @@
-﻿using RM.Notifications.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RM.Notifications.Data;
 using RM.Notifications.Model;
 
 class Program

@@ -6,14 +6,18 @@ namespace RM.CarteResto.Business
 {
     public class DischargeCardCommand
     {
+        #region Fields
         private readonly ICarteRestoRepository _carteRestoRepostiory;
         private readonly TransactionServiceGRPC _transactionService;
+        #endregion
 
+        #region Constructeur
         public DischargeCardCommand(ICarteRestoRepository carteRestoRepostiory, TransactionServiceGRPC transactionService)
         {
             _carteRestoRepostiory = carteRestoRepostiory;
             _transactionService = transactionService;
-        }
+        } 
+        #endregion
         public async Task ExecuteAsync(string partitionkey, float montant, string description)
         {
 

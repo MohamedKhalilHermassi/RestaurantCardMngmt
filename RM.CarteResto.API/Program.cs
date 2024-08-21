@@ -1,16 +1,16 @@
+using EmailClient.Extension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NotificationsClient.Extension;
+using RM.CarteResto.Data;
+using RM.Notifications.Data;
 using RM.Transaction.Abstraction;
 using RM.Transaction.Data;
-using RM.CarteResto.Data;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
-using System.Reflection;
-using RM.Notifications.Data;
-using EmailClient;
-using NotifCLient;
 
 
 var builder = WebApplication.CreateBuilder(args);

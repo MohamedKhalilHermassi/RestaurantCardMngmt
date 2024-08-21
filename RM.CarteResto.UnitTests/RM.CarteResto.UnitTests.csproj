@@ -22,9 +22,4 @@
     <ProjectReference Include="..\RM.CarteResto.Model\RM.CarteResto.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Builders\Command\" />
-    <Folder Include="Tests\Command\" />
-  </ItemGroup>
-
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NotificationsClient;
 
-namespace NotifCLient
+namespace NotificationsClient.Extension
 {
 
     public static class ConfigNotifClientService

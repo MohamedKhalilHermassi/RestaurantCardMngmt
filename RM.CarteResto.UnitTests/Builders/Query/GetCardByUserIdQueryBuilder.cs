@@ -8,7 +8,7 @@ namespace RM.CarteResto.UnitTests
     public sealed class GetCardByUserIdQueryBuilder
     {
          readonly Mock<ICarteRestoRepository> CarteRestoRepositoryMock;
-        private CarteRestaurant _carteRestaurant;
+         private CarteRestaurant _carteRestaurant;
 
         public GetCardByUserIdQueryBuilder()
         {

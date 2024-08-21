@@ -1,7 +1,7 @@
-using RM.CarteResto.Abstraction;
-using RM.CarteResto.Data;
 using Microsoft.EntityFrameworkCore;
 using ProtoBuf.Grpc.Server;
+using RM.CarteResto.Abstraction;
+using RM.CarteResto.Data;
 using RM.CarteResto.Service;
 
 var builder = WebApplication.CreateBuilder(args);

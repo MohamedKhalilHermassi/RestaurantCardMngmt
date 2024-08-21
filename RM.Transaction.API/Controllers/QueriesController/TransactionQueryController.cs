@@ -1,6 +1,6 @@
-﻿using RM.Transaction.Business;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RM.Transaction.Business;
 using RM.Transaction.Model;
 
 namespace RM.Transaction.API
@@ -11,21 +11,24 @@ namespace RM.Transaction.API
     public class TransactionQueryController : ControllerBase
     {
 
+        #region Fields
         private readonly GetTransactionQuery _getTransactionQuery;
         private readonly GetAllTransactionsQuery _getAllTransactionsQuery;
         private readonly GetTransactionsByCardQuery _getTransactionsByCardQuery;
-
+        #endregion
+        #region Constructeur
         public TransactionQueryController(
-           
-            GetTransactionQuery getTransactionQuery,
-            GetAllTransactionsQuery getAllTransactionsQuery,
-            GetTransactionsByCardQuery getTransactionsByCardQuery)
+
+           GetTransactionQuery getTransactionQuery,
+           GetAllTransactionsQuery getAllTransactionsQuery,
+           GetTransactionsByCardQuery getTransactionsByCardQuery)
         {
 
             _getTransactionQuery = getTransactionQuery;
             _getAllTransactionsQuery = getAllTransactionsQuery;
             _getTransactionsByCardQuery = getTransactionsByCardQuery;
-        }
+        } 
+        #endregion
         /// <summary>
         /// Retourner toutes les tranasctions
         /// </summary>

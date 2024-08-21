@@ -13,7 +13,7 @@ namespace RM.CarteResto.Data
             _context = context;
         }
         public async Task<CarteRestaurant> AddCard(CarteRestaurant carteResto)
-        {
+        { 
             var result = await _context.CartesRestaurant.AddAsync(carteResto);
             await _context.SaveChangesAsync();
             return result.Entity;

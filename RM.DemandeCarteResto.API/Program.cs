@@ -1,14 +1,14 @@
-using RM.CarteResto.Service;
-using EmailClient;
+using EmailClient.Extension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NotifCLient;
+using NotificationsClient.Extension;
 using RM.CarteResto.Abstraction;
 using RM.CarteResto.Business;
 using RM.CarteResto.Data;
 using RM.CarteResto.Remote;
+using RM.CarteResto.Service;
 using RM.DemandeCarteResto.Data;
 using RM.Notifications.Data;
 using System.Reflection;

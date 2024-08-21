@@ -8,18 +8,22 @@ namespace RM.CarteResto.Business
 {
     public class ChargeCardCommand
     {
-        private readonly  ICarteRestoRepository _carteRestoRepository;
-        private readonly  TransactionServiceGRPC _transactionService;
-        private readonly  RechargeCardEmail _rechargeCardEmail;
-        private readonly  ClientSignalR _clientSignalR;
+        #region Fields
+        private readonly ICarteRestoRepository _carteRestoRepository;
+        private readonly TransactionServiceGRPC _transactionService;
+        private readonly RechargeCardEmail _rechargeCardEmail;
+        private readonly ClientSignalR _clientSignalR;
+        #endregion
 
+        #region Constructeur
         public ChargeCardCommand(ICarteRestoRepository carteRestoRepository, TransactionServiceGRPC transactionService, RechargeCardEmail rechargeCardEmail, ClientSignalR clientSignalR)
         {
             _carteRestoRepository = carteRestoRepository;
             _transactionService = transactionService;
             _rechargeCardEmail = rechargeCardEmail;
             _clientSignalR = clientSignalR;
-        }
+        } 
+        #endregion
 
         public async Task ExecuteAsync(string partitionkey, float montant)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 
@@ -6,10 +7,8 @@ public class NotificationHub : Hub
 {
     private static readonly ConcurrentDictionary<string, string> _connections = new ConcurrentDictionary<string, string>();
 
-
-
     public override Task OnConnectedAsync()
-    {
+    {  
         var email = Context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (email != null)
         {

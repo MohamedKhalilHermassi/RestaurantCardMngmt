@@ -10,16 +10,20 @@ namespace JwtRoleAuthentication.Controllers;
 [Route("/api/[controller]")]
 public class UsersController : ControllerBase
 {
+    #region Fields
     private readonly UserManager<Utilisateur> _userManager;
     private readonly UserContext _context;
     private readonly TokenService _tokenService;
+    #endregion
 
+    #region Constructeur
     public UsersController(UserManager<Utilisateur> userManager, UserContext context, TokenService tokenService, ILogger<UsersController> logger)
     {
         _userManager = userManager;
         _context = context;
         _tokenService = tokenService;
-    }
+    } 
+    #endregion
 
 
     [HttpPost]

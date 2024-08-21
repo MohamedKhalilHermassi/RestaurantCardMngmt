@@ -11,19 +11,23 @@ namespace RM.CarteResto.API
     [ApiController]
     public class CarteRestoQueriesController : ControllerBase
     {
+        #region Fields
         GetAllCardsQuery _getAllCardsQuery;
         GetCardByUserIdQuery _getCardByUserIdQuery;
         GetCardQuery _getCardQuery;
+        #endregion
 
+        #region Constructeur
         public CarteRestoQueriesController(
-            GetAllCardsQuery getAllCardsQuery, 
-            GetCardByUserIdQuery getCardByUserIdQuery, 
-            GetCardQuery getCardQuery)
+         GetAllCardsQuery getAllCardsQuery,
+         GetCardByUserIdQuery getCardByUserIdQuery,
+         GetCardQuery getCardQuery)
         {
             _getAllCardsQuery = getAllCardsQuery;
             _getCardByUserIdQuery = getCardByUserIdQuery;
             _getCardQuery = getCardQuery;
-        }
+        } 
+        #endregion
         /// <summary>
         /// Retourner toutes les cartes restaurants
         /// </summary>
