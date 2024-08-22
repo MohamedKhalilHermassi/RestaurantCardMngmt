@@ -10,12 +10,16 @@ namespace RM.Transaction.Service
 {
     public class TransactionServiceGRPC : ITransactionServiceContract
     {
+        #region Fields
         private readonly ITransactionRepository _transactionRepo;
 
+        #endregion
+        #region Constructeur
         public TransactionServiceGRPC(ITransactionRepository transactionRepo)
         {
             _transactionRepo = transactionRepo;
-        }
+        } 
+        #endregion
 
         public async Task<TransactionByIdReply> addTransaction(TransactionByIdReply request)
         {

@@ -4,12 +4,17 @@ namespace RM.CarteResto.Business
 {
     public class DecrementBalanceCommand
     {
+        #region Fields
         private readonly ICarteRestoRepository _carteRestoRepository;
 
+        #endregion
+
+        #region Constructeur
         public DecrementBalanceCommand(ICarteRestoRepository carteRestoRepository)
         {
             _carteRestoRepository = carteRestoRepository;
-        }
+        } 
+        #endregion
         public async Task ExecuteAsync(string partitionkey, float montant)
 
         {

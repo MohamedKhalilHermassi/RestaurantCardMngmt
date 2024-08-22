@@ -4,12 +4,12 @@ using Microsoft.Extensions.Logging;
 using RM.Notifications.Business;
 using System.Text.Json;
 
-namespace RM.Transactions.Functions
+namespace RM.Transactions.Functions.NewFolder
 {
     public class SendNotificationFunction
     {
         private readonly ILogger<SendNotificationFunction> _logger;
-       private readonly SendEmailCommand _sendEmailCommand;
+        private readonly SendEmailCommand _sendEmailCommand;
         public SendNotificationFunction(ILogger<SendNotificationFunction> logger, SendEmailCommand sendEmailCommand)
         {
             _logger = logger;
@@ -27,7 +27,7 @@ namespace RM.Transactions.Functions
                 var root = jsonDoc.RootElement;
                 string NotifId = root.GetProperty("Id").GetString();
                 string userEmail = root.GetProperty("Email").GetString();
-               await _sendEmailCommand.ExecuteAsync(userEmail, NotifId);
+                await _sendEmailCommand.ExecuteAsync(userEmail, NotifId);
 
             }
             catch (Exception ex)

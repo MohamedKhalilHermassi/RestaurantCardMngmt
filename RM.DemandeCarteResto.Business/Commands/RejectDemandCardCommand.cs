@@ -5,13 +5,15 @@ namespace RM.DemandeCarteResto.Business
     public class RejectDemandCardCommand
     {
         #region field
-        private readonly IDemandeCarteRestoRepository _demandeCarteRepository; 
+        private readonly IDemandeCarteRestoRepository _demandeCarteRepository;
         #endregion
 
+        #region Constructeur
         public RejectDemandCardCommand(IDemandeCarteRestoRepository demandeCarteRepository)
         {
             _demandeCarteRepository = demandeCarteRepository;
-        }
+        } 
+        #endregion
 
         public async Task ExecuteAsync(string partitionkey)
         {

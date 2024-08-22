@@ -1,7 +1,6 @@
-﻿using RM.Transaction.Business;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RM.CarteResto.Remote;
+using RM.Transaction.Business;
 using RM.Transaction.Model;
 
 namespace RM.Transaction.API
@@ -10,28 +9,27 @@ namespace RM.Transaction.API
     [ApiController]
     public class TransactionCommandsController : ControllerBase
     {
+        #region Fields
         private readonly ICarteRestoService _carteRestoService;
-
-
         private readonly AddTransactionCommand _addTransactionCommand;
         private readonly RemoveTransactionCommand _removeTransactionCommand;
         private readonly UpdateTransactionCommand _updateTransactionCommand;
-       
+        #endregion
 
+        #region Contructeur
         public TransactionCommandsController(
             ICarteRestoService carteRestoService,
             AddTransactionCommand addTransactionCommand,
             RemoveTransactionCommand removeTransactionCommand,
             UpdateTransactionCommand updateTransactionCommand
-          )
+                                             )
         {
             _addTransactionCommand = addTransactionCommand;
             _removeTransactionCommand = removeTransactionCommand;
             _updateTransactionCommand = updateTransactionCommand;
             _carteRestoService = carteRestoService;
-
-
-        }
+        } 
+        #endregion
 
         /// <summary>
         /// Céer une nouvelle transaction
@@ -84,8 +82,5 @@ namespace RM.Transaction.API
 
             return NoContent();
         }
-
-
-
     }
-    }
+}

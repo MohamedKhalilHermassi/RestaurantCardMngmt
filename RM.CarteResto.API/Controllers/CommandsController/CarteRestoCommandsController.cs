@@ -13,6 +13,7 @@ namespace RM.CarteResto.API
     [ApiController]
     public class CarteRestoCommandsController : ControllerBase
     {
+        #region Fields
         private readonly AddCardCommand _addCardCommand;
         private readonly ChargeCardCommand _chargeCardCommand;
         private readonly DischargeCardCommand _dischargeCardCommand;
@@ -20,14 +21,18 @@ namespace RM.CarteResto.API
         private readonly UpdateCardCommand _updateCardCommand;
         private readonly RechargeCardEmail _rechargedCardEmail;
         private readonly ITransactionServiceContract _transactionService;
+        #endregion
+
+
+        #region Constructeur
         public CarteRestoCommandsController(
-            AddCardCommand addCardCommand,
-            ChargeCardCommand chargeCardCommand,
-            DischargeCardCommand dischargeCardCommand, 
-            RemoveCardCommand removeCardCommand, 
-            UpdateCardCommand updateCardCommand, 
-            RechargeCardEmail rechargedCardEmail,
-            ITransactionServiceContract transactionService)
+    AddCardCommand addCardCommand,
+    ChargeCardCommand chargeCardCommand,
+    DischargeCardCommand dischargeCardCommand,
+    RemoveCardCommand removeCardCommand,
+    UpdateCardCommand updateCardCommand,
+    RechargeCardEmail rechargedCardEmail,
+    ITransactionServiceContract transactionService)
         {
             _rechargedCardEmail = rechargedCardEmail;
             _addCardCommand = addCardCommand;
@@ -36,7 +41,8 @@ namespace RM.CarteResto.API
             _removeCardCommand = removeCardCommand;
             _updateCardCommand = updateCardCommand;
             _transactionService = transactionService;
-        }
+        } 
+        #endregion
 
         /// <summary>
         /// Créer une nouvelle carte restaurant

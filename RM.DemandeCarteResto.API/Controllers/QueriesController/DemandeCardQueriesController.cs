@@ -11,18 +11,23 @@ namespace RM.DemandeCarteResto.API
     {
 
 
+        #region Fields
         GetAllDemandesCardsQuery _getAllDemandesCardsQuery;
         GetAllPendingDemandsQuery _getAllPendingDemandsQuery;
         GetDemandCardByIdQuery _getDemandCardByIdQuery;
         GetDemandeCardByUserIdQuery _getDemandeCardByUserIdQuery;
+        #endregion
 
+        #region Constructeur
         public DemandeCardQueriesController(GetAllDemandesCardsQuery getAllDemandesCardsQuery, GetAllPendingDemandsQuery getAllPendingDemandsQuery, GetDemandCardByIdQuery getDemandCardByIdQuery, GetDemandeCardByUserIdQuery getDemandeCardByUserIdQuery)
         {
             _getAllDemandesCardsQuery = getAllDemandesCardsQuery;
             _getAllPendingDemandsQuery = getAllPendingDemandsQuery;
             _getDemandCardByIdQuery = getDemandCardByIdQuery;
             _getDemandeCardByUserIdQuery = getDemandeCardByUserIdQuery;
-        }
+        } 
+        #endregion
+
         /// <summary>
         /// Retourner toutes les demandes de carte restaurant
         /// </summary>

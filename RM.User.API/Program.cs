@@ -1,13 +1,13 @@
-using System.Text;
-using System.Text.Json.Serialization;
+using JwtRoleAuthentication.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using JwtRoleAuthentication.Services;
 using RM.User.Data.Data;
 using RM.User.Model.Entities;
+using System.Text;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);

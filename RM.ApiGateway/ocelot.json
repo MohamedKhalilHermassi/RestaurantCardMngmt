@@ -11,11 +11,6 @@
       ],
       "UpstreamPathTemplate": "/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-      /*  "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }*/
-
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -41,11 +36,6 @@
       ],
       "UpstreamPathTemplate": "/transactions/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-      /*  "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }*/
-
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",

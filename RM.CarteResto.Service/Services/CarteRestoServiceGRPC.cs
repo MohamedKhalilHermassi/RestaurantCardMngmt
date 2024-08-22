@@ -1,22 +1,27 @@
-﻿using RM.CarteResto.Abstraction;
-using RM.CarteResto.Business;
-using Google.Protobuf.WellKnownTypes;
+﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using RM.CarteResto.Model;
 using ProtoBuf.Grpc;
+using RM.CarteResto.Abstraction;
+using RM.CarteResto.Business;
+using RM.CarteResto.Model;
 using RM.CarteResto.Remote;
 
 namespace RM.CarteResto.Service
 {
     public class CarteRestoServiceGRPC : ICarteRestoService
     {
+        #region Fields
         private readonly ICarteRestoRepository _carteRepo;
         private readonly DecrementBalanceCommand _decrementBalanceCommand;
+        #endregion
+
+        #region Constructeur
         public CarteRestoServiceGRPC(ICarteRestoRepository carteRepo, DecrementBalanceCommand decrementBalanceCommand)
         {
             _carteRepo = carteRepo;
             _decrementBalanceCommand = decrementBalanceCommand;
-        }
+        } 
+        #endregion
 
         public async Task<CarteRestoByIdReply> AddCarteResto(CarteRestoByIdReply carteResto)
         {

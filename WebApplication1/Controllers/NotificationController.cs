@@ -9,14 +9,18 @@ namespace API
     [ApiController]
     public class NotificationController : ControllerBase
     {
+        #region Fields
         ReadNotificationCommand _readNotificationCommand;
         GetAllNotificationsByReceiverIdQuery _getAllNotificationByReceiverId;
+        #endregion
 
+        #region Constructeur
         public NotificationController(ReadNotificationCommand readNotificationCommand, GetAllNotificationsByReceiverIdQuery getAllNotificationByReceiverId)
         {
             _readNotificationCommand = readNotificationCommand;
             _getAllNotificationByReceiverId = getAllNotificationByReceiverId;
-        }
+        } 
+        #endregion
         /// <summary>
         /// Retourner la liste de notifications
         /// </summary>

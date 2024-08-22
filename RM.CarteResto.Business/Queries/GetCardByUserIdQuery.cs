@@ -6,12 +6,16 @@ namespace RM.CarteResto.Business
 {
     public class GetCardByUserIdQuery
     {
+        #region Fields
         private readonly ICarteRestoRepository _carteRestoRepository;
 
+        #endregion
+        #region Constructeur
         public GetCardByUserIdQuery(ICarteRestoRepository carteRestoRepository)
         {
             _carteRestoRepository = carteRestoRepository;
-        }
+        } 
+        #endregion
         public async Task<CarteRestaurant> ExecuteAsync(string partitionKey)
         {
             if (string.IsNullOrEmpty(partitionKey))

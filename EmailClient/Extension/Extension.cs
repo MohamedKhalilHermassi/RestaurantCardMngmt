@@ -3,7 +3,7 @@ using RM.Notifications.Abstraction;
 using RM.Notifications.Business;
 using RM.Notifications.Data;
 
-namespace EmailClient
+namespace EmailClient.Extension
 {
 
     public static class ConfigEmailService
@@ -14,7 +14,7 @@ namespace EmailClient
             services.AddScoped<IEmailNotificationRepository, EmailNotificationRepository>();
             services.AddScoped<SendEmailCommand>();
             services.AddScoped<ClientEmail>();
-           
+
 
             return services;
         }
