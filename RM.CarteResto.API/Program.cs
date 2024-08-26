@@ -4,10 +4,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NotificationsClient.Extension;
+using RM.CarteResto.Abstraction;
+using RM.CarteResto.Business;
 using RM.CarteResto.Data;
+using RM.Notif.Business;
+using RM.Notif.Business.Commands;
+using RM.Notifications.Abstraction;
+using RM.Notifications.Business;
 using RM.Notifications.Data;
 using RM.Transaction.Abstraction;
 using RM.Transaction.Data;
+using RM.Transaction.Remote;
+using RM.Transaction.Service;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -42,14 +50,44 @@ builder.Services.AddDbContext<NotificationContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
-builder.Services.AddNotificationsServices();
 builder.Services.AddNotifClientServices();
 builder.Services.AddDbContext<CarteRestoContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
 
-builder.Services.AddCarteRestoServices();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IEmailNotificationRepository, EmailNotificationRepository>();
+
+// COMMANDS
+builder.Services.AddScoped<AddNotificationCommand>();
+builder.Services.AddScoped<ReadNotificationCommand>();
+builder.Services.AddScoped<SendEmailCommand>();
+builder.Services.AddScoped<SendSuccessDemandEmailCommand>();
+builder.Services.AddScoped<ApprovedDemandEmail>();
+builder.Services.AddScoped<RejectedDemandEmail>();
+builder.Services.AddScoped<RechargeCardEmail>();
+
+
+// QUERIES
+builder.Services.AddScoped<GetAllNotificationsByReceiverIdQuery>();
+
+
+
+//Services Carte Resto
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<ICarteRestoRepository, CarteRestoRepository>();
+builder.Services.AddTransactionGrpcClient();
+builder.Services.AddScoped<TransactionServiceGRPC>();
+builder.Services.AddScoped<ITransactionServiceContract, TransactionServiceGRPC>();
+builder.Services.AddScoped<AddCardCommand>();
+builder.Services.AddScoped<ChargeCardCommand>();
+builder.Services.AddScoped<DischargeCardCommand>();
+builder.Services.AddScoped<RemoveCardCommand>();
+builder.Services.AddScoped<UpdateCardCommand>();
+builder.Services.AddScoped<GetAllCardsQuery>();
+builder.Services.AddScoped<GetCardByUserIdQuery>();
+builder.Services.AddScoped<GetCardQuery>();
 
 builder.Services.AddDbContext<TransactionContext>(options =>
 {
@@ -65,12 +103,10 @@ builder.Services.AddDbContext<NotificationContext>(options =>
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
 builder.Services.AddEmailServices();
-builder.Services.AddNotificationsServices();
 
 //Transaction GRPC 
 //builder.Services.AddTransactionGrpcClient();
 //builder.Services.AddScoped<ITransactionServiceContract, TransactionServiceGRPC>();
-builder.Services.AddCarteRestoServices();
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());

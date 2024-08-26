@@ -7,6 +7,8 @@ using RM.CarteResto.Business;
 using RM.CarteResto.Data;
 using RM.CarteResto.Remote;
 using RM.CarteResto.Service;
+using RM.Transaction.Abstraction;
+using RM.Transaction.Business;
 using RM.Transaction.Data;
 using System.Reflection;
 using System.Text;
@@ -29,7 +31,6 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddProblemDetails();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
@@ -46,7 +47,13 @@ builder.Services.AddControllers().AddJsonOptions(opt =>
     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
-builder.Services.AddTransactionServices();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<AddTransactionCommand>();
+builder.Services.AddScoped<RemoveTransactionCommand>();
+builder.Services.AddScoped<UpdateTransactionCommand>();
+builder.Services.AddScoped<GetTransactionQuery>();
+builder.Services.AddScoped<GetAllTransactionsQuery>();
+builder.Services.AddScoped<GetTransactionsByCardQuery>(); 
 builder.Services.AddScoped<DecrementBalanceCommand>();
 
 
@@ -121,9 +128,7 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
@@ -135,9 +140,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStatusCodePages();
 app.UseRouting();
-
 app.UseCors("AllowSpecificOrigin");
-
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

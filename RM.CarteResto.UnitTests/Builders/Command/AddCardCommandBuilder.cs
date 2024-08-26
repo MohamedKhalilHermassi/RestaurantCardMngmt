@@ -7,15 +7,16 @@ namespace RM.CarteResto.UnitTests
 {
     public sealed class AddCardCommandBuilder
     {
-        public readonly Mock<ICarteRestoRepository> CarteRestoRepositoryMock;= new Mock<ICarteRestoRepository>();
-        private CarteRestaurant _carteRestaurant;
+
+        public readonly Mock<ICarteRestoRepository> CarteRestoRepositoryMock = new Mock<ICarteRestoRepository>();
+        private readonly CarteRestaurantStore carterestaurantStore = new CarteRestaurantStore();
+
+        private readonly CarteRestaurant _carteRestaurant;
 
         public AddCardCommandBuilder()
         {
-            var carteRestaurantStore = new CarteRestaurantStore();
-
-            CarteRestoRepositoryMock 
-            _carteRestaurant = carteRestaurantStore.validCarteRestaurant();
+            CarteRestaurantStore carteRestaurantStore = new CarteRestaurantStore();
+            CarteRestaurant _carteRestaurant = carteRestaurantStore.validCarteRestaurant();
         }
 
         public AddCardCommandBuilder WithPartitionKey()

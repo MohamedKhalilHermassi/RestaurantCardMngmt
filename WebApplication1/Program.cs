@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RM.Notif.Business.Commands;
+using RM.Notif.Business;
+using RM.Notifications.Abstraction;
+using RM.Notifications.Business;
 using RM.Notifications.Data;
 using System.Reflection;
 using System.Security.Claims;
@@ -41,7 +45,16 @@ builder.Services.AddDbContext<EmailNotificationContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
-builder.Services.AddNotificationsServices();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IEmailNotificationRepository, EmailNotificationRepository>();
+builder.Services.AddScoped<AddNotificationCommand>();
+builder.Services.AddScoped<ReadNotificationCommand>();
+builder.Services.AddScoped<SendEmailCommand>();
+builder.Services.AddScoped<SendSuccessDemandEmailCommand>();
+builder.Services.AddScoped<ApprovedDemandEmail>();
+builder.Services.AddScoped<RejectedDemandEmail>();
+builder.Services.AddScoped<RechargeCardEmail>();
+builder.Services.AddScoped<GetAllNotificationsByReceiverIdQuery>();
 
 var validIssuer = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidIssuer");
 var validAudience = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidAudience");
