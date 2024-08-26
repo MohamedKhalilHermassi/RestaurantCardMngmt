@@ -79,6 +79,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient", "EmailClient\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RM.CarteResto.UnitTests", "RM.CarteResto.UnitTests\RM.CarteResto.UnitTests.csproj", "{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RM.DemandeCarteResto.UnitTests", "RM.DemandeCarteResto.UnitTests\RM.DemandeCarteResto.UnitTests.csproj", "{D6B8B9C8-8E1E-40EC-99A1-2D08731F4C33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -213,6 +215,10 @@ Global
 		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B8B9C8-8E1E-40EC-99A1-2D08731F4C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B8B9C8-8E1E-40EC-99A1-2D08731F4C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B8B9C8-8E1E-40EC-99A1-2D08731F4C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B8B9C8-8E1E-40EC-99A1-2D08731F4C33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -249,6 +255,7 @@ Global
 		{A9AC305C-3CD0-45C9-8960-BE37B88B3427} = {69ED018E-2A1F-42DA-861F-63815A1C9FA0}
 		{7A6903EC-472E-4F2A-A0D7-F3E40D2578AF} = {69ED018E-2A1F-42DA-861F-63815A1C9FA0}
 		{AF0F7E9F-4DEB-428F-ABD6-A2E4C056374A} = {E2FF7802-7487-4E37-BD21-D487D5F34057}
+		{D6B8B9C8-8E1E-40EC-99A1-2D08731F4C33} = {3B964708-23C5-4F25-B611-29F89BEF773C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0851E63E-C278-4212-9A5C-7EC39CEB10F6}

@@ -9,7 +9,13 @@ using RM.CarteResto.Business;
 using RM.CarteResto.Data;
 using RM.CarteResto.Remote;
 using RM.CarteResto.Service;
+using RM.DemandeCarteResto.Abstraction;
+using RM.DemandeCarteResto.Business;
 using RM.DemandeCarteResto.Data;
+using RM.Notif.Business.Commands;
+using RM.Notif.Business;
+using RM.Notifications.Abstraction;
+using RM.Notifications.Business;
 using RM.Notifications.Data;
 using System.Reflection;
 using System.Security.Claims;
@@ -68,15 +74,41 @@ builder.Services.AddScoped<DecrementBalanceCommand>();
 builder.Services.AddEmailServices();
 builder.Services.AddScoped<ICarteRestoRepository, CarteRestoRepository>();
 builder.Services.AddCarteRestoGrpcClient();
-builder.Services.AddDemandCardServices();
+builder.Services.AddScoped<IDemandeCarteRestoRepository, DemandeCarteRestoRepository>();
+builder.Services.AddCarteRestoGrpcClient();
 builder.Services.AddScoped<ICarteRestoService, CarteRestoServiceGRPC>();
+builder.Services.AddScoped<AddDemandCardCommand>();
+builder.Services.AddScoped<AcceptDemandCardCommand>();
+builder.Services.AddScoped<RejectDemandCardCommand>();
+builder.Services.AddScoped<RemoveDemandCardCommand>();
+builder.Services.AddScoped<UpdateCardRestoCommand>();
+builder.Services.AddScoped<GetAllDemandesCardsQuery>();
+builder.Services.AddScoped<GetAllPendingDemandsQuery>();
+builder.Services.AddScoped<GetDemandCardByIdQuery>();
+builder.Services.AddScoped<GetDemandeCardByUserIdQuery>();
+builder.Services.AddScoped<ICarteRestoService, CarteRestoServiceGRPC>();
+
 builder.Services.AddDbContext<NotificationContext>(options =>
 {
     options.UseCosmos(accountEndpoint, accountKey, databaseName);
 });
-builder.Services.AddNotificationsServices();
 builder.Services.AddNotifClientServices();
+// REPOS
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IEmailNotificationRepository, EmailNotificationRepository>();
 
+// COMMANDS
+builder.Services.AddScoped<AddNotificationCommand>();
+builder.Services.AddScoped<ReadNotificationCommand>();
+builder.Services.AddScoped<SendEmailCommand>();
+builder.Services.AddScoped<SendSuccessDemandEmailCommand>();
+builder.Services.AddScoped<ApprovedDemandEmail>();
+builder.Services.AddScoped<RejectedDemandEmail>();
+builder.Services.AddScoped<RechargeCardEmail>();
+
+
+// QUERIES
+builder.Services.AddScoped<GetAllNotificationsByReceiverIdQuery>();
 
 var validIssuer = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidIssuer");
 var validAudience = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidAudience");

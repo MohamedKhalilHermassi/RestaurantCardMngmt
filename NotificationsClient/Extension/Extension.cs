@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NotificationsClient;
 
 namespace NotificationsClient.Extension
 {
